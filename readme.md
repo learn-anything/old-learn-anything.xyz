@@ -25,7 +25,7 @@ edgedb project init
 Name instance `learn-anything`. Apply migrations with:
 
 ```
-edgedb migration apply
+edgedb migration apply --dev-mode
 ```
 
 Setup auth with:
