@@ -1,9 +1,17 @@
 import { useState } from "react"
 import Icon from "./Icons"
 import { AnimatePresence, motion } from "framer-motion"
+import { Observable } from "@legendapp/state"
+import { Page } from "./routes/HomeRoute"
 
 export function Sidebar(props: {
-	personalPages: { title: string; pageUrl: string; prettyName: string }[]
+	personalPages: {
+		title: string
+		pageUrl: string
+		prettyName: string
+		content: string
+	}[]
+	topicTitle?: Observable<Page>
 	// setMode: (value: string) => void
 	// mode: string
 	// currentPage: string
@@ -54,8 +62,8 @@ export function Sidebar(props: {
 								<div
 									key={index}
 									onClick={() => {
-										// props.setCurrentPage(page)
-										// props.setMode("Page")
+										console.log(page)
+										props.topicTitle?.set(page)
 									}}
 									className="text-white/60 px-3 p-[6px] cursor-pointer mb-[2px] hover:bg-hoverDark rounded-[7px] transition-all"
 								>

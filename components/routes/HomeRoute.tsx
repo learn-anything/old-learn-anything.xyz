@@ -15,11 +15,27 @@ export type Links = {
 	date: string
 	date_added: String
 }
+export type Page = {
+	title: string
+	prettyName: string
+	pageUrl: string
+	content?: string
+}
 export default observer(function HomeRoute(props: Props) {
 	const local = useObservable({
 		pages: [
-			{ title: "physics", prettyName: "Physics", pageUrl: "hi" },
-			{ title: "karabiner", prettyName: "Karabiner", pageUrl: "hi" },
+			{
+				title: "physics",
+				prettyName: "Physics",
+				pageUrl: "hi",
+				content: "I hate Physics!",
+			},
+			{
+				title: "karabiner",
+				prettyName: "Karabiner",
+				pageUrl: "hi",
+				content: "???",
+			},
 		],
 		showView: "All" as "All" | "Links" | "Todos" | "Topics",
 		personalLinks: [
