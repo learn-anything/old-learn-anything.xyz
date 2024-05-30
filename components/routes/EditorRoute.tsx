@@ -11,6 +11,7 @@ import StarterKit from "@tiptap/starter-kit"
 import { Sidebar } from "../Sidebar"
 import Placeholder from "@tiptap/extension-placeholder"
 import { useEffect } from "react"
+import { LinkOrder } from "../Topbar"
 
 interface Props {}
 export default observer(function EditorRoute(props: Props) {
@@ -74,7 +75,9 @@ export default observer(function EditorRoute(props: Props) {
 						<div className="text-[26px] font-bold">
 							{local.pageContent.prettyName.get()}
 						</div>
-						<div></div>
+						<div className="flex gap-1">
+							<LinkOrder />
+						</div>
 					</div>
 					<EditorContent editor={editor} />
 				</div>

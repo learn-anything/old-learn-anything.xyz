@@ -137,7 +137,7 @@ function Filter(props: { filter?: string[] }) {
 	)
 }
 
-function LinkOrder(props: { filterOrder?: "Custom" | "RecentlyAdded" }) {
+export function LinkOrder(props: { filterOrder?: "Custom" | "RecentlyAdded" }) {
 	const [expanded, setExpanded] = useState(false)
 	const [filterOrder, setFilterOrder] = useState("Recently Added")
 	const [expandTimer, setExpandTimer] = useState(false)

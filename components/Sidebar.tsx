@@ -62,7 +62,6 @@ export function Sidebar(props: {
 								<div
 									key={index}
 									onClick={() => {
-										console.log(page)
 										props.topicTitle?.set(page)
 									}}
 									className="text-white/60 px-3 p-[6px] cursor-pointer mb-[2px] hover:bg-hoverDark rounded-[7px] transition-all"
