@@ -1,11 +1,10 @@
 "use client"
 import { observer, useObservable } from "@legendapp/state/react"
-import Button from "../Button"
-
-import Page from "../Page"
-import { Sidebar } from "../Sidebar"
 import { useState } from "react"
 import Icon from "../Icons"
+import Page from "../Page"
+import { Sidebar } from "../Sidebar"
+
 interface Props {}
 export type Links = {
 	title: string
@@ -16,7 +15,6 @@ export type Links = {
 	date: string
 	date_added: String
 }
-
 export default observer(function HomeRoute(props: Props) {
 	const local = useObservable({
 		pages: [
@@ -28,6 +26,7 @@ export default observer(function HomeRoute(props: Props) {
 			{
 				// use `title` as id for now
 				title: "Modern JavaScript Tutorial",
+				url: "https://javascript.info",
 				description: "Teaches you JS in modern way",
 				note: "loved it",
 				status: "Learning",
@@ -37,6 +36,7 @@ export default observer(function HomeRoute(props: Props) {
 			},
 			{
 				title: "Modern Rust Tutorial",
+				url: "https://doc.rust-lang.org/rust-by-example/",
 				description: "Teaches you Rust in modern way",
 				note: "was ok",
 				status: "Learned",
