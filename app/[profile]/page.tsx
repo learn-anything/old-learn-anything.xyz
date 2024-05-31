@@ -9,10 +9,12 @@ export default function Profile() {
 
 	return (
 		<div className="flex flex-col h-screen">
-			<Topbar showView={showView} />
 			<div className="flex flex-1">
-				<Sidebar personalPages={[]} />
-				<div className="flex-1">
+				<div className="w-1/6">
+					<Sidebar personalPages={[]} />
+				</div>
+				<div className="flex-1 flex flex-col">
+					<Topbar showView={showView} />
 					<ProfileRoute />
 				</div>
 			</div>
