@@ -1,6 +1,7 @@
 "use client"
 import { observer, useObservable } from "@legendapp/state/react"
-import { PiLinkSimple, PiPictureInPictureThin } from "react-icons/pi"
+import { PiPictureInPictureThin } from "react-icons/pi"
+import { icons } from "../Icons"
 
 interface Props {}
 export default observer(function ProfileRoute(props: Props) {
@@ -41,15 +42,13 @@ export default observer(function ProfileRoute(props: Props) {
 						<div className="flex space-x-5 items-center">
 							<PiPictureInPictureThin />
 							<a className="text-white">{link.title.toString()}</a>
-							<div className="flex flex-row items-center text-zinc-800 hover:cursor-pointer">
-								<PiLinkSimple className="mr-1" />
-								<a>{link.url.toString()}</a>
-							</div>
 						</div>
-
-						<span className="text-zinc-300 p-3 rounded-md bg-[#1b1b1b]">
-							{link.topic.toString()}
-						</span>
+						<div
+							className="mr-1 text-zinc-600 hover:cursor-pointer"
+							onClick={() => window.open(link.url, "_blank")}
+						>
+							<icons.Link />
+						</div>
 					</div>
 				))}
 			</div>
