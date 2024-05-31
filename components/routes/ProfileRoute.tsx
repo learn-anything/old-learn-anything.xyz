@@ -33,11 +33,11 @@ export default observer(function ProfileRoute(props: Props) {
 
 	return (
 		<div className="p-4 text-white bg-[#0f0f0f]">
-			<div className="space-y-4 overflow-y-auto max-h-[calc(100vh)] scroll-hide">
+			<div className="space-y-1 overflow-y-auto max-h-[calc(100vh)] scroll-hide">
 				{local.personalLinks.map((link, index) => (
 					<div
 						key={index}
-						className="flex items-center justify-between p-4 rounded hover:cursor-pointer bg-[#121212]"
+						className="flex items-center justify-between p-4 rounded-xl hover:cursor-pointer bg-[#121212]"
 					>
 						<div className="flex space-x-5 items-center">
 							<PiPictureInPictureThin />
