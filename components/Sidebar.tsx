@@ -4,7 +4,8 @@ import Icon from "./Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { Observable } from "@legendapp/state"
 import { Page } from "./routes/HomeRoute"
-import { GoSearch } from "react-icons/go"
+import { IoSearch } from "react-icons/io5"
+import { icons } from "./Icons"
 
 export default function Sidebar(props: {
 	personalPages: {
@@ -26,10 +27,10 @@ export default function Sidebar(props: {
 		<div className=" flex flex-col justify-between h-screen min-w-[200px] bg-dark text-textGray ">
 			<div>
 				<div className="flex-between m-[20px] mr-[2px]">
-					<div className="h-[40px] w-[40px] rounded-full bg-white"></div>
-					<div className="px-3 w-[60%] h-[40px] flex-center rounded-md text-white/30 bg-hoverDark">
+					<icons.LearnAnythinglogo />
+					<div className="px-4 w-[50%] h-[50px] flex-center rounded-xl text-white/30 bg-hoverDark">
 						<div className="flex items-center w-full">
-							<GoSearch className="w-6 h-6" />
+							<IoSearch className="w-9 h-9" />
 							<input
 								type="text"
 								className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-white/30"
@@ -38,7 +39,7 @@ export default function Sidebar(props: {
 					</div>
 				</div>
 				<div className="col-gap-[8px] pl-2">
-					<div className="cursor-pointer px-3 text-white/60 p-[6px] rounded-[7px] transition-all">
+					<div className="cursor-pointer px-3 text-white bg-[#1b1b1b] p-[8px] rounded-[7px] transition-all">
 						Inbox
 					</div>
 					<div

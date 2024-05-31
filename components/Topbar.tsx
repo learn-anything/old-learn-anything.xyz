@@ -9,7 +9,7 @@ export default function Topbar(props: {
 	showView: ObservablePrimitive<"All" | "Links" | "Todos" | "Topics">
 }) {
 	return (
-		<div className="flex-between p-5 ">
+		<div className="flex-between px-5 pt-5">
 			<div className="flex [&>*]:h-full bg-hoverDark rounded-[7px] text-white/60 [&>*]:flex-center h-[34px] items-center">
 				<button
 					className={`px-[11px] ${props.showView.get() === "All" ? "button" : ""}`}

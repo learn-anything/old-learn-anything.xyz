@@ -31,13 +31,12 @@ export default observer(function ProfileRoute(props: Props) {
 	})
 
 	return (
-		<div className="p-4 text-white" style={{ backgroundColor: "#0f0f0f" }}>
+		<div className="p-4 text-white bg-[#0f0f0f]">
 			<div className="space-y-4 overflow-y-auto max-h-[calc(100vh)] scroll-hide">
 				{local.personalLinks.map((link, index) => (
 					<div
 						key={index}
-						style={{ backgroundColor: "#121212" }}
-						className="flex items-center justify-between p-4 rounded hover:cursor-pointer"
+						className="flex items-center justify-between p-4 rounded hover:cursor-pointer bg-[#121212]"
 					>
 						<div className="flex space-x-5 items-center">
 							<PiPictureInPictureThin />
@@ -48,10 +47,7 @@ export default observer(function ProfileRoute(props: Props) {
 							</div>
 						</div>
 
-						<span
-							style={{ backgroundColor: "#1b1b1b" }}
-							className="text-zinc-300 p-3 rounded-md"
-						>
+						<span className="text-zinc-300 p-3 rounded-md bg-[#1b1b1b]">
 							{link.topic.toString()}
 						</span>
 					</div>
