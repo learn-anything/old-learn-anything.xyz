@@ -1,10 +1,11 @@
+"use client"
 import { useState } from "react"
 import Icon from "./Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { Observable } from "@legendapp/state"
 import { Page } from "./routes/HomeRoute"
 
-export function Sidebar(props: {
+export default function Sidebar(props: {
 	personalPages: {
 		title: string
 		pageUrl: string

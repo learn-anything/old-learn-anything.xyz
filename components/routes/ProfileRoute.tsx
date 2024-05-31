@@ -30,11 +30,9 @@ export default observer(function ProfileRoute(props: Props) {
 			topic: "JavaScript",
 		}),
 	})
+
 	return (
-		<div
-			className="p-4 text-white min-h-screen"
-			style={{ backgroundColor: "#0f0f0f" }}
-		>
+		<div className="p-4 text-white" style={{ backgroundColor: "#0f0f0f" }}>
 			<div className="space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scroll-hide">
 				{local.personalLinks.map((link, index) => (
 					<div
@@ -60,17 +58,17 @@ export default observer(function ProfileRoute(props: Props) {
 					</div>
 				))}
 			</div>
-			<div className="flex justify-center mt-5 fixed bottom-5 w-full">
+			{/* <div className="flex justify-center mt-5 fixed bottom-5 w-full">
 				<div className="relative w-[25%]">
 					<input
 						type="text"
 						placeholder="Search or Add"
 						style={{ backgroundColor: "#202020" }}
-						className="text-zinc-400 placeholder:text-zinc-700 pl-10 pr-10 placeholder:text-center px-2 py-3 rounded-xl w-full border border-zinc-600"
+						className="text-zinc-400 placeholder:text-zinc-700 px-10 placeholder:text-center py-3 rounded-xl w-full border border-zinc-600"
 					/>
 					<GoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-zinc-700" />
 				</div>
-			</div>
+			</div> */}
 		</div>
 	)
 })
