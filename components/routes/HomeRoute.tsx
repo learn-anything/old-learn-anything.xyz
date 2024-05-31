@@ -3,7 +3,7 @@ import { observer, useObservable } from "@legendapp/state/react"
 import { useState } from "react"
 import Icon from "../Icons"
 import Page from "../Page"
-import { Sidebar } from "../Sidebar"
+import Sidebar from "../Sidebar"
 
 interface Props {}
 export type Links = {

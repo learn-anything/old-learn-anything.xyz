@@ -8,10 +8,10 @@ import {
 	EditorContent,
 } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
-import { Sidebar } from "../Sidebar"
 import Placeholder from "@tiptap/extension-placeholder"
 import { useEffect } from "react"
 import { LinkOrder } from "../Topbar"
+import Sidebar from "../Sidebar"
 
 interface Props {}
 export default observer(function EditorRoute(props: Props) {
