@@ -24,25 +24,18 @@ export default observer(function ProfileRoute(props: Props) {
 				title: "Ableton 12",
 			},
 		],
-		personalLinks: [
-			{
-				title: "Modern JavaScript Tutorial",
-				url: "https://javascript.info",
-				topic: "JavaScript",
-			},
-			{
-				title: "Modern Rust Tutorial",
-				url: "https://doc.rust-lang.org/rust-by-example/",
-				topic: "Rust",
-			},
-		],
+		personalLinks: Array(20).fill({
+			title: "Modern JavaScript Tutorial",
+			url: "https://javascript.info",
+			topic: "JavaScript",
+		}),
 	})
 	return (
 		<div
 			className="p-4 text-white min-h-screen"
 			style={{ backgroundColor: "#0f0f0f" }}
 		>
-			<div className="space-y-4">
+			<div className="space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scroll-hide">
 				{local.personalLinks.map((link, index) => (
 					<div
 						key={index}
@@ -67,8 +60,8 @@ export default observer(function ProfileRoute(props: Props) {
 					</div>
 				))}
 			</div>
-			<div className="flex justify-center mt-5">
-				<div className="relative w-[30%]">
+			<div className="flex justify-center mt-5 fixed bottom-5 w-full">
+				<div className="relative w-[25%]">
 					<input
 						type="text"
 						placeholder="Search or Add"
