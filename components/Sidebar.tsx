@@ -4,6 +4,7 @@ import Icon from "./Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { Observable } from "@legendapp/state"
 import { Page } from "./routes/HomeRoute"
+import { GoSearch } from "react-icons/go"
 
 export default function Sidebar(props: {
 	personalPages: {
@@ -26,12 +27,14 @@ export default function Sidebar(props: {
 			<div>
 				<div className="flex-between m-[20px] mr-[2px]">
 					<div className="h-[40px] w-[40px] rounded-full bg-white"></div>
-					<div
-						className="px-[15px] h-[40px] flex-center rounded-[7px] text-white/30 bg-hoverDark "
-						onClick={() => {}}
-					>
-						{/* {props.mode === "Search" ? "Back" : "Search"} */}
-						Search
+					<div className="px-3 w-[60%] h-[40px] flex-center rounded-md text-white/30 bg-hoverDark">
+						<div className="flex items-center w-full">
+							<GoSearch className="w-6 h-6" />
+							<input
+								type="text"
+								className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-white/30"
+							/>
+						</div>
 					</div>
 				</div>
 				<div className="col-gap-[8px] pl-2">

@@ -1,6 +1,5 @@
 "use client"
 import { observer, useObservable } from "@legendapp/state/react"
-import { GoSearch } from "react-icons/go"
 import { PiLinkSimple, PiPictureInPictureThin } from "react-icons/pi"
 
 interface Props {}
@@ -58,17 +57,6 @@ export default observer(function ProfileRoute(props: Props) {
 					</div>
 				))}
 			</div>
-			{/* <div className="flex justify-center mt-5 fixed bottom-5 w-full">
-				<div className="relative w-[25%]">
-					<input
-						type="text"
-						placeholder="Search or Add"
-						style={{ backgroundColor: "#202020" }}
-						className="text-zinc-400 placeholder:text-zinc-700 px-10 placeholder:text-center py-3 rounded-xl w-full border border-zinc-600"
-					/>
-					<GoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-zinc-700" />
-				</div>
-			</div> */}
 		</div>
 	)
 })
