@@ -72,7 +72,9 @@ function ProfileLink(props: {
 								transition={{ duration: 0.3 }}
 								className="opacity-60 flex-center"
 							>
-								<Icon name="Heart" height="24" width="24" border="white" />
+								<button className="cursor:pointer">
+									<Icon name="Heart" height="24" width="24" border="white" />
+								</button>
 							</motion.div>
 							<Status />
 						</div>
@@ -99,11 +101,17 @@ function ProfileLink(props: {
 						<div className="text-white/10">2024</div>
 					</div>
 					<div className="w-full flex-between border-t border-[#1f222b] pt-2">
-						<input
-							type="text"
-							placeholder="Take a note..."
-							className="text-[14px] text-white/40 pl-2 outline-none bg-dark/20"
-						/>
+						<div className="flex-row items-center">
+							<button className="cursor:pointer">
+								<Icon name="Note" height="24" width="24" border="white" />
+							</button>
+							<input
+								type="text"
+								placeholder="Take a note..."
+								className="text-[14px] text-white/40 pl-2 outline-none border-none bg-inherit"
+							/>
+						</div>
+
 						<div
 							className="w-fit"
 							onClick={() => {
@@ -143,11 +151,11 @@ function Status() {
 				setExpandTimer(false)
 			}}
 		>
-			<div
+			<button
 				onClick={() => {
 					setExpanded(!expanded)
 				}}
-				className={`text-[#D29752] h-[34px] pr-[4px] px-[11px] rounded-[7px] flex-center ${status === "To Learn" && "text-[#d26352]"} ${status === "Learned" && "text-[#52d274]"}`}
+				className={`cursor-pointer text-[#D29752] h-[34px] pr-[4px] px-[11px] rounded-[7px] flex-center ${status === "To Learn" && "text-[#d26352]"} ${status === "Learned" && "text-[#52d274]"}`}
 				style={{
 					background:
 						"linear-gradient(0deg, rgba(255, 167, 64, 0.02) 0%, rgba(255, 167, 64, 0.02) 100%), rgba(255, 255, 255, 0.02)",
@@ -155,7 +163,7 @@ function Status() {
 			>
 				{status}
 				<Icon name="ArrowDown" />
-			</div>
+			</button>
 			<AnimatePresence>
 				{expanded ? (
 					<motion.div
