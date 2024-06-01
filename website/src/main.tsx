@@ -4,6 +4,7 @@ import "./index.css"
 import { createJazzReactContext, DemoAuth } from "jazz-react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import InboxPage from "./routes/Inbox"
+import { LAAccount } from "./schema"
 
 const router = createBrowserRouter([
 	{
@@ -13,8 +14,8 @@ const router = createBrowserRouter([
 ])
 
 const Jazz = createJazzReactContext({
-	auth: DemoAuth({ appName: "Learn Anything" }),
-	peer: "wss://mesh.jazz.tools/?key=nikita@nikiv.dev", // <- put your email here to get a proper API key later
+	auth: DemoAuth({ appName: "Learn Anything", accountSchema: LAAccount }),
+	peer: "wss://mesh.jazz.tools/?key=nikita@nikiv.dev",
 })
 export const { useAccount, useCoState } = Jazz
 

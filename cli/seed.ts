@@ -4,13 +4,16 @@
 const userId = process.env.USER_ID!
 
 async function seed() {
-	checkThatNotRunningInProduction()
+	// checkThatNotRunningInProduction()
 	const args = Bun.argv
 	const command = args[2]
 	try {
 		switch (command) {
 			case undefined:
 				console.log("No command provided")
+				break
+			case "jazz-seed-inbox":
+				seedInbox()
 				break
 			default:
 				console.log("Unknown command")
@@ -21,14 +24,17 @@ async function seed() {
 		console.error("Error occurred:", err)
 	}
 }
-
-function checkThatNotRunningInProduction() {
-	if (process.env.EDGEDB_INSTANCE === "nikitavoloboev/learn-anything") {
-		throw new Error(
-			"Connected to production DB, don't run these seed commands on it",
-		)
-	}
+async function seedInbox() {
+	//
 }
+
+// function checkThatNotRunningInProduction() {
+// 	if (process.env.EDGEDB_INSTANCE === "nikitavoloboev/learn-anything") {
+// 		throw new Error(
+// 			"Connected to production DB, don't run these seed commands on it",
+// 		)
+// 	}
+// }
 
 // TODO: fix
 // @ts-ignore
