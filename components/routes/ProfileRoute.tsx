@@ -32,7 +32,7 @@ export default observer(function ProfileRoute(props: Props) {
 	})
 
 	return (
-		<div className="p-4 text-white bg-[#0f0f0f]">
+		<div className="px-6 text-white bg-[#0f0f0f]">
 			<div className="space-y-1 overflow-y-auto max-h-[calc(100vh)] scroll-hide">
 				{local.personalLinks.map((link, index) => (
 					<div
