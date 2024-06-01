@@ -193,7 +193,7 @@ function Status() {
 							}}
 							className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
 						>
-							To Lea e ern
+							To Learn
 						</div>
 						<div
 							onClick={() => {
