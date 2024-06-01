@@ -7,16 +7,16 @@ export default function Test() {
 	// const topic = useCoState(Topic, topicID)
 
 	return (
-		<>
+		<div className="text-white">
 			<h1>Test</h1>
-			{me?.root?.inbox?.map((item) => {
+			{me?.root.inbox.map((item) =>
 				item instanceof TodoItem ? (
-					<TodoItemComponent item={item} />
+					<TodoItemComponent key={item.id} item={item} />
 				) : (
-					<PersonalLinkComponent item={item} />
+					<PersonalLinkComponent key={item.id} item={item} />
 				)
-			})}
-		</>
+			)}
+		</div>
 	)
 }
 
@@ -25,5 +25,5 @@ export function TodoItemComponent({ item }: { item: TodoItem }) {
 }
 
 export function PersonalLinkComponent({ item }: { item: PersonalLink }) {
-	return ""
+	return item.globalLink?.url
 }

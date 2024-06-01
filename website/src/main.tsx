@@ -20,7 +20,13 @@ const router = createBrowserRouter([
 ])
 
 const Jazz = createJazzReactContext({
-	auth: DemoAuth({ appName: "Learn Anything", accountSchema: LaAccount }),
+	auth: DemoAuth({
+		appName: "Learn Anything",
+		accountSchema: LaAccount,
+		seedAccounts:
+			import.meta.env.VITE_SEED_ACCOUNTS &&
+			JSON.parse(import.meta.env.VITE_SEED_ACCOUNTS),
+	}),
 	peer: "wss://mesh.jazz.tools/?key=nikita@nikiv.dev",
 })
 export const { useAccount, useCoState } = Jazz
