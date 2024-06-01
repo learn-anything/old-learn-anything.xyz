@@ -10,6 +10,8 @@ export default function Page(props: {
 	showView: ObservablePrimitive<"All" | "Links" | "Todos" | "Topics">
 	links: Observable<Links[]>
 }) {
+	const [expandedLink, setExpandedLink] = useState<string | null>(null)
+
 	return (
 		<div className="w-full h-full border  border-white/10 rounded-[20px]">
 			<Topbar showView={props.showView} />
@@ -17,7 +19,11 @@ export default function Page(props: {
 				{props.links.get().map((link, index) => {
 					return (
 						<div key={index}>
-							<ProfileLink link={link} />
+							<ProfileLink
+								link={link}
+								expandedLink={expandedLink}
+								setExpandedLink={setExpandedLink}
+							/>
 						</div>
 					)
 				})}
@@ -26,19 +32,27 @@ export default function Page(props: {
 	)
 }
 
-function ProfileLink(props: { link: Links }) {
+function ProfileLink(props: {
+	link: Links
+	expandedLink: string | null
+	setExpandedLink: (title: string | null) => void
+}) {
 	const [hovered, setHovered] = useState(false)
-	const [linkExpanded, setLinkExpanded] = useState<string | null>("")
 	const handleAttachmentClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation()
 	}
+
+	const isExpanded = props.expandedLink === props.link.title
+
 	return (
 		<motion.div
 			id="ProfileLink"
 			onClick={() => {
-				setLinkExpanded(props.link.title)
+				props.setExpandedLink(isExpanded ? null : props.link.title)
 			}}
-			className={`rounded-lg hover:bg-hoverDark bg-softDark p-2 pl-3 h-full transition-all ${linkExpanded === props.link.title ? "h-full transition-all !bg-[#171A21]" : ""}`}
+			className={`rounded-lg hover:bg-hoverDark bg-softDark p-2 pl-3 h-full transition-all ${
+				isExpanded ? "h-full transition-all !bg-[#171A21]" : ""
+			}`}
 		>
 			<div className="flex-between">
 				<div className="flex gap-2 items-center">
@@ -46,12 +60,9 @@ function ProfileLink(props: { link: Links }) {
 						.
 					</div>
 					<div>{props.link.title}</div>
-					{/* <div class="text-[14px] text-softDarkText/40 hover:text-softDarkText/70 transition-all font-light">
-						{props.link.}
-					</div> */}
 				</div>
 				<div className="flex gap-2">
-					{hovered || linkExpanded === props.link.title ? (
+					{hovered || isExpanded ? (
 						<div className="flex-center gap-2">
 							<motion.div
 								animate={{
@@ -73,13 +84,13 @@ function ProfileLink(props: { link: Links }) {
 				</div>
 			</div>
 
-			{linkExpanded === props.link.title ? (
+			{isExpanded ? (
 				<motion.div
 					onClick={handleAttachmentClick}
 					className="w-full h-[300px] flex flex-col justify-between"
 				>
 					<div className="pl-7 flex-col flex justify-between gap-2 p-2 text-[14px]">
-						<div className=" text-white/50 w-[700px]">
+						<div className="text-white/50 w-[700px]">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
 							officia. Delectus in dolor quam praesentium laborum velit iusto
 							aut saepe quibusdam, quia, nihil omnis odit dignissimos tenetur
@@ -96,7 +107,7 @@ function ProfileLink(props: { link: Links }) {
 						<div
 							className="w-fit"
 							onClick={() => {
-								setLinkExpanded(null)
+								props.setExpandedLink(null)
 							}}
 						>
 							<Button label="Done" onChange={() => {}} />
@@ -174,7 +185,7 @@ function Status() {
 							}}
 							className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
 						>
-							To Learn
+							To Lea e ern
 						</div>
 						<div
 							onClick={() => {
