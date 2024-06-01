@@ -64,7 +64,9 @@ export default observer(function HomeRoute(props: Props) {
 		// by title
 		likedPersonalLinks: ["Modern JavaScript Tutorial"],
 	})
+
 	const [showPlusbar, setShowPlusBar] = useState(false)
+
 	return (
 		<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
 			<Sidebar personalPages={local.pages.get()} />

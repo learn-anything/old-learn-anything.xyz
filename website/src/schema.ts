@@ -51,19 +51,19 @@ export class UserRoot extends CoMap {
 
 export class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
 
-export class LAAccount extends Account {
+export class LaAccount extends Account {
 	profile = co.ref(UserProfile)
 	root = co.ref(UserRoot)
 
 	async migrate(
-		this: LAAccount,
+		this: LaAccount,
 		creationProps?: { name: string } | undefined,
 	): Promise<void> {
-		if (!this._refs.root) {
+		if (!this._refs.root && creationProps) {
 			const profileGroup = Group.create({ owner: this })
 			profileGroup.addMember("everyone", "reader")
 			this.profile = UserProfile.create(
-				{ name: creationProps!.name },
+				{ name: creationProps.name },
 				{ owner: profileGroup },
 			)
 

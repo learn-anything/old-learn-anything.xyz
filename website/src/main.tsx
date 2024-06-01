@@ -3,18 +3,24 @@ import ReactDOM from "react-dom/client"
 import "./index.css"
 import { createJazzReactContext, DemoAuth } from "jazz-react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import InboxPage from "./routes/Inbox"
-import { LAAccount } from "./schema"
+import { LaAccount } from "./schema"
+import Test from "./routes/Test"
+import HomeAuth from "./routes/HomeAuth"
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <InboxPage />,
+		// TODO: render HomePublic if not auth'd
+		element: <HomeAuth />,
+	},
+	{
+		path: "/test",
+		element: <Test />,
 	},
 ])
 
 const Jazz = createJazzReactContext({
-	auth: DemoAuth({ appName: "Learn Anything", accountSchema: LAAccount }),
+	auth: DemoAuth({ appName: "Learn Anything", accountSchema: LaAccount }),
 	peer: "wss://mesh.jazz.tools/?key=nikita@nikiv.dev",
 })
 export const { useAccount, useCoState } = Jazz
