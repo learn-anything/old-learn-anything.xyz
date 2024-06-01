@@ -1,22 +1,21 @@
-import { useState, useEffect } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { useState } from "react"
 import Button from "./Button"
-import Topbar from "./Topbar"
-import { Observable, ObservablePrimitive } from "@legendapp/state"
-import { Links } from "./routes/HomeRoute"
 import Icon from "./Icons"
+import Topbar from "./Topbar"
 
-export default function Page(props: {
-	showView: ObservablePrimitive<"All" | "Links" | "Todos" | "Topics">
-	links: Observable<Links[]>
-}) {
+interface Props {
+	showView: string
+	links: []
+}
+export default function Page(props: Props) {
 	const [expandedLink, setExpandedLink] = useState<string | null>(null)
 
 	return (
 		<div className="w-full h-full border  border-white/10 rounded-[20px]">
 			<Topbar showView={props.showView} />
 			<div className=" px-5 w-full  col-gap-[4px]">
-				{props.links.get().map((link, index) => {
+				{props.links.map((link, index) => {
 					return (
 						<div key={index}>
 							<ProfileLink
@@ -33,7 +32,8 @@ export default function Page(props: {
 }
 
 function ProfileLink(props: {
-	link: Links
+	// link: Links
+	link: any
 	expandedLink: string | null
 	setExpandedLink: (title: string | null) => void
 }) {

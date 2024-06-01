@@ -1,45 +1,45 @@
 "use client"
-import { useState } from "react"
-import Icons from "./Icons"
 import { AnimatePresence, motion } from "framer-motion"
-import Icon from "./Icons"
-import { ObservablePrimitive } from "@legendapp/state"
+import { useState } from "react"
+import { default as Icon, default as Icons } from "./Icons"
 
 export default function Topbar(props: {
-	showView: ObservablePrimitive<"All" | "Links" | "Todos" | "Topics">
+	// showView: ObservablePrimitive<"All" | "Links" | "Todos" | "Topics">
+	showView: string
+	setShowView: () => void
 }) {
 	return (
 		<div className="flex-between px-5 pt-5 mb-5">
 			<div className="flex [&>*]:h-full bg-hoverDark rounded-[7px] text-white/60 [&>*]:flex-center h-[34px] items-center">
 				<button
-					className={`px-[11px] ${props.showView.get() === "All" ? "button" : ""}`}
+					className={`px-[11px] ${props.showView === "All" ? "button" : ""}`}
 					onClick={() => {
-						props.showView.set("All")
+						// props.showView.set("All")
 					}}
 				>
 					All
 				</button>
 				<button
-					className={`px-[11px] ${props.showView.get() === "Links" ? "button bg-red-500" : ""}`}
+					className={`px-[11px] ${props.showView === "Links" ? "button bg-red-500" : ""}`}
 					onClick={() => {
-						props.showView.set("Links")
+						// props.showView.set("Links")
 						//shits not working why tf
 					}}
 				>
 					Links
 				</button>
 				<button
-					className={`px-[11px] ${props.showView.get() === "Todos" ? "button" : ""}`}
+					className={`px-[11px] ${props.showView === "Todos" ? "button" : ""}`}
 					onClick={() => {
-						props.showView.set("Todos")
+						// props.showView.set("Todos")
 					}}
 				>
 					Todos
 				</button>
 				<button
-					className={`px-[11px] ${props.showView.get() === "Topics" ? "button" : ""}`}
+					className={`px-[11px] ${props.showView === "Topics" ? "button" : ""}`}
 					onClick={() => {
-						props.showView.set("Topics")
+						// props.showView.set("Topics")
 					}}
 				>
 					Topics

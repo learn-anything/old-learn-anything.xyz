@@ -1,11 +1,10 @@
 "use client"
-import { useState } from "react"
-import Icon from "./Icons"
-import { AnimatePresence, motion } from "framer-motion"
 import { Observable } from "@legendapp/state"
-import { Page } from "./routes/HomeRoute"
+import { AnimatePresence, motion } from "framer-motion"
+import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
-import { icons } from "./Icons"
+import Icon, { icons } from "./Icons"
+import { Page } from "./routes/HomeRoute"
 
 export default function Sidebar(props: {
 	personalPages: {
