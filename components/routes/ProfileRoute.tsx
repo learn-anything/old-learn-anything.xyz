@@ -45,7 +45,7 @@ export default observer(function ProfileRoute(props: Props) {
 						</div>
 						<div
 							className="mr-1 text-zinc-600 hover:cursor-pointer"
-							onClick={() => window.open(link.url, "_blank")}
+							onClick={() => window.open(link.url.get(), "_blank")}
 						>
 							<icons.Link />
 						</div>
