@@ -1,22 +1,25 @@
 import { useAccount } from "../main"
 import { PersonalLink, TodoItem } from "../schema"
 
-export default function Test() {
+export default function TestRoute() {
 	const { me } = useAccount({ root: { inbox: [{}] } })
+	console.log(me, "me")
 
 	// const topic = useCoState(Topic, topicID)
 
 	return (
-		<div className="text-white">
-			<h1>Test</h1>
-			{me?.root.inbox.map((item) =>
-				item instanceof TodoItem ? (
-					<TodoItemComponent key={item.id} item={item} />
-				) : (
-					<PersonalLinkComponent key={item.id} item={item} />
-				)
-			)}
-		</div>
+		<>
+			<div className="text-white">
+				<h1>Test</h1>
+				{me?.root.inbox.map((item) =>
+					item instanceof TodoItem ? (
+						<TodoItemComponent key={item.id} item={item} />
+					) : (
+						<PersonalLinkComponent key={item.id} item={item} />
+					),
+				)}
+			</div>
+		</>
 	)
 }
 

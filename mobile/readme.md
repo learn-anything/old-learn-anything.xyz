@@ -1,3 +1,6 @@
+> [!WARNING]
+> Waiting for [Jazz](https://jazz.tools) support for RN
+
 ## Setup
 
 ```

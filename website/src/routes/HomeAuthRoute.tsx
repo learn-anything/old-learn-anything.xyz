@@ -2,8 +2,12 @@ import { useState } from "react"
 import Icon from "../components/Icons"
 import Page from "../components/Page"
 import Sidebar from "../components/Sidebar"
+import { useAccount } from "../main"
 
-export default function HomeAuth() {
+export default function HomeAuthRoute() {
+	const { me } = useAccount({ root: { inbox: [{}] } })
+	console.log(me, "me")
+
 	const [pages] = useState([
 		{
 			title: "physics",

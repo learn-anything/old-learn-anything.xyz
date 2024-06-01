@@ -1,5 +1,6 @@
 using extension auth;
 
+# TODO: cleanup to make work with jazz (make sure jazz works well first)
 module default {
   scalar type Role extending enum<admin, user>;
   global current_user := (
