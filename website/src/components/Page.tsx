@@ -95,20 +95,17 @@ function ProfileLink(props: {
 							aut saepe quibusdam, quia, nihil omnis odit dignissimos tenetur
 							incidunt placeat fuga.
 						</div>
-						<div className="text-white/10">2024</div>
+						<div className="text-white/10">{props.link.date}</div>
 					</div>
-					<div className="w-full flex-between border-t border-[#1f222b] pt-2">
-						<div className="flex-row items-center">
-							<button className="cursor:pointer">
-								<Icon name="Note" height="24" width="24" border="white" />
-							</button>
+					<div className="w-full flex flex-row justify-between items-center border-t border-[#1f222b] p-2">
+						<div className="flex flex-row items-center">
+							<Icon name="Note" height="24" width="24" border="white" />
 							<input
 								type="text"
 								placeholder="Take a note..."
 								className="text-[14px] text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 							/>
 						</div>
-
 						<div
 							className="w-fit"
 							onClick={() => {
