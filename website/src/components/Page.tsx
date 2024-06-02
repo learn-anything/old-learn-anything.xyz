@@ -12,20 +12,21 @@ export default function Page(props: Props) {
 	const [expandedLink, setExpandedLink] = useState<string | null>(null)
 
 	return (
-		<div className="w-full h-full border  border-white/10 rounded-[20px]">
-			<Topbar showView={props.showView} />
-			<div className=" px-5 w-full  col-gap-[4px]">
-				{props.links.map((link, index) => {
-					return (
-						<div key={index}>
-							<ProfileLink
-								link={link}
-								expandedLink={expandedLink}
-								setExpandedLink={setExpandedLink}
-							/>
-						</div>
-					)
-				})}
+		<div className="w-full h-full border border-white/10 rounded-[20px]">
+			<Topbar
+				showView={props.showView as "All" | "Links" | "Todos" | "Topics"}
+				setShowView={() => {}}
+			/>
+			<div className="px-5 w-full col-gap-[4px]">
+				{props.links.map((link, index) => (
+					<div key={index}>
+						<ProfileLink
+							link={link}
+							expandedLink={expandedLink}
+							setExpandedLink={setExpandedLink}
+						/>
+					</div>
+				))}
 			</div>
 		</div>
 	)
@@ -79,10 +80,6 @@ function ProfileLink(props: {
 							<Status />
 						</div>
 					) : null}
-
-					<div className="px-[11px] h-[34px] flex-center rounded-[7px] bg-white bg-opacity-[0.04]">
-						{props.link.title}
-					</div>
 				</div>
 			</div>
 
