@@ -17,7 +17,7 @@ export default function Page(props: Props) {
 				showView={props.showView as "All" | "Links" | "Todos" | "Topics"}
 				setShowView={() => {}}
 			/>
-			<div className="px-5 w-full col-gap-[4px]">
+			<div className="px-5 w-full">
 				{props.links.map((link, index) => (
 					<div key={index}>
 						<ProfileLink
@@ -51,36 +51,39 @@ function ProfileLink(props: {
 			onClick={() => {
 				props.setExpandedLink(isExpanded ? null : props.link.title)
 			}}
-			className={`rounded-lg hover:bg-hoverDark bg-softDark p-2 pl-3 h-full transition-all ${
+			className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all ${
 				isExpanded ? "h-full transition-all !bg-[#171A21]" : ""
 			}`}
 		>
-			<div className="flex items-center flex-row justify-between">
-				<div className="items-center">
-					<div>{props.link.title}</div>
+			<div className="flex flex-row items-center justify-between">
+				<div
+					className={`flex flex-row items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
+				>
+					<p>{props.link.title}</p>
+					{!isExpanded && (
+						<Icon name="Link" height="20" width="30" border="gray" />
+					)}
 				</div>
-				<div className="flex gap-2">
-					{hovered || isExpanded ? (
-						<div className="flex flex-row justify-between items-center gap-2">
-							<motion.div
-								animate={{
-									transform: ["translateX(5px)", "translateX(0)"],
-									opacity: [0, 0.6],
-								}}
-								transition={{ duration: 0.3 }}
-								className="opacity-60 items-center flex-row gap-2"
-							>
-								<button className="cursor:pointer">
-									<Icon name="Options" height="20" width="30" border="gray" />
-								</button>
-								<button className="cursor:pointer">
-									<Icon name="Heart" height="24" width="24" border="gray" />
-								</button>
-							</motion.div>
-							<Status />
-						</div>
-					) : null}
-				</div>
+				{hovered || isExpanded ? (
+					<div className="flex flex-row justify-between items-center gap-2">
+						<motion.div
+							animate={{
+								transform: ["translateX(5px)", "translateX(0)"],
+								opacity: [0, 0.6],
+							}}
+							transition={{ duration: 0.3 }}
+							className="opacity-60 items-center flex flex-row gap-2"
+						>
+							<button className="cursor:pointer">
+								<Icon name="Options" height="20" width="30" border="gray" />
+							</button>
+							<button className="cursor:pointer">
+								<Icon name="Heart" height="24" width="24" border="gray" />
+							</button>
+						</motion.div>
+						<Status />
+					</div>
+				) : null}
 			</div>
 
 			{isExpanded ? (
@@ -205,33 +208,4 @@ function Status() {
 			</AnimatePresence>
 		</motion.div>
 	)
-}
-
-{
-	/* <div className="">
-			<div className="flex-between h-[74px] p-[20px] pr-[25px]">
-				{page ? (
-					<motion.div
-						initial={{ opacity: 0, x: 10 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 1 }}
-						className="text-[25px] font-bold"
-					>
-						{title}
-					</motion.div>
-				) : (
-					<input
-						type="text"
-						placeholder="Title"
-						className="placeholder-white/20 font-bold text-[25px] bg-transparent outline-none"
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-					/>
-				)}
-				<div className="flex gap-[20px] flex-center">
-					<div>vis</div>
-					<div>...</div>
-				</div>
-			</div>
-		</div> */
 }
