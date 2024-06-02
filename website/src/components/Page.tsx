@@ -55,26 +55,26 @@ function ProfileLink(props: {
 				isExpanded ? "h-full transition-all !bg-[#171A21]" : ""
 			}`}
 		>
-			<div className="flex-between">
-				<div className="flex gap-2 items-center">
-					<div className="bg-softDark rounded-md flex-center w-[20px] h-[20px] text-softDark">
-						.
-					</div>
+			<div className="flex items-center flex-row justify-between">
+				<div className="items-center">
 					<div>{props.link.title}</div>
 				</div>
 				<div className="flex gap-2">
 					{hovered || isExpanded ? (
-						<div className="flex-center gap-2">
+						<div className="flex flex-row justify-between items-center gap-2">
 							<motion.div
 								animate={{
 									transform: ["translateX(5px)", "translateX(0)"],
 									opacity: [0, 0.6],
 								}}
 								transition={{ duration: 0.3 }}
-								className="opacity-60 flex-center"
+								className="opacity-60 items-center flex-row gap-2"
 							>
 								<button className="cursor:pointer">
-									<Icon name="Heart" height="24" width="24" border="white" />
+									<Icon name="Options" height="20" width="30" border="gray" />
+								</button>
+								<button className="cursor:pointer">
+									<Icon name="Heart" height="24" width="24" border="gray" />
 								</button>
 							</motion.div>
 							<Status />
@@ -152,14 +152,16 @@ function Status() {
 				onClick={() => {
 					setExpanded(!expanded)
 				}}
-				className={`cursor-pointer text-[#D29752] h-[34px] pr-[4px] px-[11px] rounded-[7px] flex-center ${status === "To Learn" && "text-[#d26352]"} ${status === "Learned" && "text-[#52d274]"}`}
+				className={`items-center justify-center flex flex-row cursor-pointer text-[#D29752] h-[34px] px-[11px] rounded-[7px] flex-center ${status === "To Learn" && "text-[#d26352]"} ${status === "Learned" && "text-[#52d274]"}`}
 				style={{
 					background:
 						"linear-gradient(0deg, rgba(255, 167, 64, 0.02) 0%, rgba(255, 167, 64, 0.02) 100%), rgba(255, 255, 255, 0.02)",
 				}}
 			>
+				<span className="mr-2">
+					<Icon name="Hat" />
+				</span>
 				{status}
-				<Icon name="ArrowDown" />
 			</button>
 			<AnimatePresence>
 				{expanded ? (
