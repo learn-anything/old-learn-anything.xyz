@@ -4,8 +4,8 @@ import "./index.css"
 import { createJazzReactContext, DemoAuth } from "jazz-react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { LaAccount } from "./schema"
-import Test from "./routes/Test"
-import HomeAuth from "./routes/HomeAuth"
+import Test from "./routes/TestRoute"
+import HomeAuth from "./routes/HomeAuthRoute"
 
 const router = createBrowserRouter([
 	{
