@@ -1,11 +1,12 @@
 import { Filter } from "./Filter"
+import { LinkOrder } from "./LinkOrder"
 
 export default function Topbar(props: {
 	showView: "All" | "Links" | "Todos" | "Topics"
 	setShowView: (view: "All" | "Links" | "Todos" | "Topics") => void
 }) {
 	return (
-		<div className="flex-between px-5 pt-5 mb-5">
+		<div className="flex flex-row justify-between px-5 pt-5 mb-5">
 			<div className="flex [&>*]:h-full bg-hoverDark rounded-[7px] text-white/60 [&>*]:flex-center h-[34px] items-center">
 				<button
 					className={`px-[11px] ${props.showView === "All" ? "button" : ""}`}
@@ -41,9 +42,9 @@ export default function Topbar(props: {
 					Topics
 				</button>
 			</div>
-			<div className="flex gap-2">
+			<div className="flex flex-row items-center gap-2">
 				<Filter />
-				{/* <LinkOrder /> */}
+				<LinkOrder />
 			</div>
 		</div>
 	)

@@ -34,7 +34,7 @@ export function Filter(props: Props) {
 							border: "1px dashed rgba(255, 255, 255, 0.10)",
 							background: "rgba(255, 255, 255, 0.02)",
 						}}
-						className="h-[34px] px-[11px] pl-[9px] rounded-[7px] shrink-0 flex-center dark:text-white/50"
+						className="flex flex-row items-center h-[34px] px-[11px] pl-[9px] rounded-[7px] shrink-0 flex-center dark:text-white/50"
 						onClick={() => {
 							setExpanded(!expanded)
 						}}

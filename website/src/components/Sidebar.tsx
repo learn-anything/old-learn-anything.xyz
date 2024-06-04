@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import Icon, { icons } from "./Icons"
-import { Page } from "./routes/HomeRoute"
+import Page from "./Page"
 
 export default function Sidebar(props: {
 	personalPages: {
@@ -13,7 +13,7 @@ export default function Sidebar(props: {
 		prettyName: string
 		content: string
 	}[]
-	topicTitle?: Observable<Page>
+	topicTitle?: Observable<typeof Page>
 	// setMode: (value: string) => void
 	// mode: string
 	// currentPage: string
