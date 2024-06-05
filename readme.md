@@ -11,7 +11,7 @@ bun i
 We use [Jazz](https://jazz.tools/) for all global/local state management.
 
 > [!NOTE]
-> Things are still being worked on, but you can try run website, ask for help on Discord if something is failing
+> Things are still being worked on, but you can try run website, ask for help on [Discord](https://discord.gg/bxtD8x6aNF) if something is failing
 
 ```
 bun setup

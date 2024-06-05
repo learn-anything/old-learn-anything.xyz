@@ -24,6 +24,7 @@ const router = createBrowserRouter([
 		element: <ProfileEditRoute />,
 	},
 	{
+		// TODO: make dynamic routes
 		path: `@$/{username}`,
 		element: <Profile />,
 	},
