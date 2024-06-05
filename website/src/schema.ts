@@ -22,6 +22,12 @@ export class Section extends CoMap {
 	links = co.ref(ListOfLinks)
 }
 
+export class Page extends CoMap {
+	title = co.string
+	// TODO: make rich text
+	content = co.string
+}
+
 export class ListOfLinks extends CoList.Of(co.ref(GlobalLink)) {}
 
 export class TodoItem extends CoMap {

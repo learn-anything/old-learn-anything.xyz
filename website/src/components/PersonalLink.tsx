@@ -48,7 +48,7 @@ function ProfileLink(props: {
 	setExpandedLink: (title: string | null) => void
 	showNewTodoOrLink: boolean
 }) {
-	const [hovered, setHovered] = useState(false)
+	const [hovered] = useState(false)
 	const handleAttachmentClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation()
 	}
