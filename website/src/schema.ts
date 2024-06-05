@@ -1,6 +1,7 @@
 import { CoMap, CoList, co, Account, Group } from "jazz-tools"
 
 export class PersonalLink extends CoMap {
+	note = co.string
 	type = co.literal("personalLink")
 	globalLink = co.ref(GlobalLink)
 }
@@ -75,9 +76,9 @@ export class LaAccount extends Account {
 					wantToLearn: ListOfTopics.create([], { owner: this }),
 					learning: ListOfTopics.create([], { owner: this }),
 					learned: ListOfTopics.create([], { owner: this }),
-					inbox: Inbox.create([], { owner: this }),
 					personalLinks: ListOfPersonalLinks.create([], { owner: this }),
 					pages: ListOfPages.create([], { owner: this }),
+					todos: ListOfPersonalTodoItems.create([], { owner: this }),
 				},
 				{ owner: this },
 			)
