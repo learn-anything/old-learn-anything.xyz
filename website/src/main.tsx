@@ -1,21 +1,31 @@
+import { createJazzReactContext, DemoAuth } from "jazz-react"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./index.css"
-import { createJazzReactContext, DemoAuth } from "jazz-react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import "./index.css"
+import HomeAuthRoute from "./routes/HomeAuthRoute"
+import TestRoute from "./routes/TestRoute"
+import ProfileEditRoute from "./routes/ProfileEditRoute"
+import Profile from "./components/Profile"
 import { LaAccount } from "./schema"
-import Test from "./routes/TestRoute"
-import HomeAuth from "./routes/HomeAuthRoute"
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		// TODO: render HomePublic if not auth'd
-		element: <HomeAuth />,
+		element: <HomeAuthRoute />,
 	},
 	{
 		path: "/test",
-		element: <Test />,
+		element: <TestRoute />,
+	},
+	{
+		path: "/accounts/edit",
+		element: <ProfileEditRoute />,
+	},
+	{
+		path: `@$/{username}`,
+		element: <Profile />,
 	},
 ])
 
