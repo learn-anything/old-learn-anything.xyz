@@ -29,6 +29,7 @@ async function setup() {
 	await $`bun seed home`
 }
 
+// gets state for Jazz user
 async function getJazzState() {
 	const me = await (
 		await startWorker({
@@ -37,7 +38,11 @@ async function getJazzState() {
 			accountSchema: LaAccount,
 		})
 	).worker.ensureLoaded({
-		root: { personalLinks: [{}], pages: [{}], todos: [{}] },
+		root: {
+			personalLinks: [{}],
+			pages: [{}],
+			todos: [{}],
+		},
 	})
 
 	if (!me) return

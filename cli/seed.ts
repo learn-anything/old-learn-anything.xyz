@@ -34,7 +34,7 @@ async function home() {
 
 	const user = (await (
 		await LaAccount.createAs(worker, {
-			creationProps: { name: "Nikiv" },
+			creationProps: { name: "nikiv" },
 		})
 	).ensureLoaded({ root: { personalLinks: [], pages: [], todos: [] } }))!
 
@@ -49,12 +49,13 @@ async function home() {
 		{ url: "https://jazz.tools" },
 		{ owner: globalLinksGroup },
 	)
+	// TODO: make note: optional
 	const personalLink1 = PersonalLink.create(
-		{ globalLink: globalLink1, type: "personalLink" },
+		{ globalLink: globalLink1, type: "personalLink", note: "" },
 		{ owner: user },
 	)
 	const personalLink2 = PersonalLink.create(
-		{ globalLink: globalLink2, type: "personalLink" },
+		{ globalLink: globalLink2, type: "personalLink", note: "Great framework" },
 		{ owner: user },
 	)
 	user.root.personalLinks.push(personalLink1)
@@ -78,6 +79,12 @@ async function home() {
 
 	await Bun.write(
 		"./website/.env",
+		`VITE_SEED_ACCOUNTS='${JSON.stringify({
+			nikiv: credentials,
+		})}'`,
+	)
+	await Bun.write(
+		"./.env",
 		`VITE_SEED_ACCOUNTS='${JSON.stringify({
 			nikiv: credentials,
 		})}'`,

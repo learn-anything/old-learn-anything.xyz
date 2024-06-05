@@ -52,21 +52,20 @@ export default function HomeAuthRoute() {
 		root: { pages: [{}], personalLinks: [{ globalLink: {} }], todos: [{}] },
 	}).me?.root
 
-	console.log(global?.personalLinks, "personal links")
+	if (!global) return <></>
 
 	return (
 		<>
 			<div className="text-white">
-				{global?.personalLinks.map((ps) => {
-					return <div key={ps.id}>{ps.globalLink.url}</div>
+				{global.personalLinks.map((personalLink) => {
+					return <div key={personalLink.id}>{personalLink.globalLink.url}</div>
 				})}
 			</div>
 			<input
 				type="text"
-				value={global?.personalLinks[0].note}
+				value={global.personalLinks[1].note}
 				onChange={(e) => {
-					if (!global) return
-					global.personalLinks[0].note = e.target.value
+					global.personalLinks[1].note = e.target.value
 				}}
 				className="p-2 rounded-md border border-gray-300"
 			/>

@@ -7,7 +7,7 @@ export class PersonalLink extends CoMap {
 }
 
 export class GlobalLink extends CoMap {
-	url = co.string
+	url = co.string // unique
 }
 
 export class GlobalTopic extends CoMap {
@@ -15,13 +15,11 @@ export class GlobalTopic extends CoMap {
 	title = co.string
 	sections = co.ref(ListOfSections)
 }
-
-export class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
-
 export class Section extends CoMap {
 	title = co.string
-	links = co.ref(ListOfLinks)
+	links = co.ref(ListOfGlobalLinks)
 }
+export class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
 
 export class Page extends CoMap {
 	title = co.string
@@ -29,31 +27,29 @@ export class Page extends CoMap {
 	content = co.string
 }
 
-export class ListOfLinks extends CoList.Of(co.ref(GlobalLink)) {}
-
 export class TodoItem extends CoMap {
 	type = co.literal("todo")
 	text = co.string
 	done = co.boolean
 }
 
+export class ListOfGlobalLinks extends CoList.Of(co.ref(GlobalLink)) {}
 export class ListOfPersonalLinks extends CoList.Of(co.ref(PersonalLink)) {}
 export class ListOfPersonalTodoItems extends CoList.Of(co.ref(TodoItem)) {}
 export class ListOfPages extends CoList.Of(co.ref(Page)) {}
+export class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
 export class UserProfile extends CoMap {
 	name = co.string
-	// avatar
+	// TODO: avatar
 }
 export class UserRoot extends CoMap {
-	wantToLearn = co.ref(ListOfTopics)
-	learning = co.ref(ListOfTopics)
-	learned = co.ref(ListOfTopics)
+	topicsWantToLearn = co.ref(ListOfTopics)
+	topicsLearning = co.ref(ListOfTopics)
+	topicsLearned = co.ref(ListOfTopics)
 	personalLinks = co.ref(ListOfPersonalLinks)
 	pages = co.ref(ListOfPages)
 	todos = co.ref(ListOfPersonalTodoItems)
 }
-
-export class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
 
 export class LaAccount extends Account {
 	profile = co.ref(UserProfile)
@@ -73,9 +69,9 @@ export class LaAccount extends Account {
 
 			this.root = UserRoot.create(
 				{
-					wantToLearn: ListOfTopics.create([], { owner: this }),
-					learning: ListOfTopics.create([], { owner: this }),
-					learned: ListOfTopics.create([], { owner: this }),
+					topicsWantToLearn: ListOfTopics.create([], { owner: this }),
+					topicsLearning: ListOfTopics.create([], { owner: this }),
+					topicsLearned: ListOfTopics.create([], { owner: this }),
 					personalLinks: ListOfPersonalLinks.create([], { owner: this }),
 					pages: ListOfPages.create([], { owner: this }),
 					todos: ListOfPersonalTodoItems.create([], { owner: this }),
