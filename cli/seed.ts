@@ -1,3 +1,8 @@
+import { GlobalLink, LaAccount, PersonalLink } from "@/website/src/schema"
+import { startWorker } from "jazz-nodejs"
+import { Group } from "jazz-tools"
+import { RawControlledAccount } from "cojson"
+
 async function seed() {
 	const args = Bun.argv
 	const command = args[2]
@@ -19,17 +24,12 @@ async function seed() {
 	}
 }
 
-import { GlobalLink, LaAccount, PersonalLink } from "@/website/src/schema"
-import { startWorker } from "jazz-nodejs"
-import { Group } from "jazz-tools"
-import { RawControlledAccount } from "cojson"
-
 // seeds / (for auth and public)
 async function home() {
 	const { worker } = await startWorker({
 		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
 		accountSecret:
-			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
+			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPrjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
 	})
 
 	const user = (await (

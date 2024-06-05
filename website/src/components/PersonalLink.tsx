@@ -7,7 +7,8 @@ import NewTodoOrLink from "./NewTodoOrLink"
 
 interface Props {
 	showView: string
-	links: []
+	// TODO: get from jazz
+	links: any[]
 	showNewTodoOrLink: boolean
 }
 export default function PersonalLink(props: Props) {
