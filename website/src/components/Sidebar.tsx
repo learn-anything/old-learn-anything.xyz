@@ -1,19 +1,16 @@
 "use client"
-import { Observable } from "@legendapp/state"
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import Icon, { icons } from "./Icons"
-import Page from "./Page"
 
 export default function Sidebar(props: {
 	personalPages: {
 		title: string
-		pageUrl: string
 		prettyName: string
 		content: string
 	}[]
-	topicTitle?: Observable<typeof Page>
+	// topicTitle?: Observable<typeof Page>
 	// setMode: (value: string) => void
 	// mode: string
 	// currentPage: string

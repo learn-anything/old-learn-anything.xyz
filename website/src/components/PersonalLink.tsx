@@ -117,6 +117,9 @@ function ProfileLink(props: {
 								<input
 									type="text"
 									placeholder="Take a note..."
+									onChange={() => {
+										// TODO: change
+									}}
 									className="text-[14px] text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 								/>
 							</div>

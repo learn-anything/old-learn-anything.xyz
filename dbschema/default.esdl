@@ -20,6 +20,7 @@ module default {
     };
     # pretty name of user (same as X username/name split)
     displayName: str;
+
     bio: str;
     userRole: Role {
       default := "user";

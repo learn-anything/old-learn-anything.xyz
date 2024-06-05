@@ -1,4 +1,4 @@
-import { GlobalLink, LaAccount, PersonalLink } from "@/website/src/schema"
+import { GlobalLink, LaAccount, Page, PersonalLink } from "@/website/src/schema"
 import { startWorker } from "jazz-nodejs"
 import { Group } from "jazz-tools"
 import { RawControlledAccount } from "cojson"
@@ -36,7 +36,7 @@ async function home() {
 		await LaAccount.createAs(worker, {
 			creationProps: { name: "Nikiv" },
 		})
-	).ensureLoaded({ root: { inbox: [] } }))!
+	).ensureLoaded({ root: { personalLinks: [], pages: [], todos: [] } }))!
 
 	const globalLinksGroup = Group.create({ owner: worker })
 	globalLinksGroup.addMember("everyone", "reader")
@@ -57,8 +57,19 @@ async function home() {
 		{ globalLink: globalLink2, type: "personalLink" },
 		{ owner: user },
 	)
-	user.root.inbox.push(personalLink1)
-	user.root.inbox.push(personalLink2)
+	user.root.personalLinks.push(personalLink1)
+	user.root.personalLinks.push(personalLink2)
+
+	const page1 = Page.create(
+		{ title: "Physics", content: "Physics is great" },
+		{ owner: user },
+	)
+	const page2 = Page.create(
+		{ title: "Karabiner", content: "Karabiner is great" },
+		{ owner: user },
+	)
+	user.root.pages.push(page1)
+	user.root.pages.push(page2)
 
 	const credentials = {
 		accountID: user.id,

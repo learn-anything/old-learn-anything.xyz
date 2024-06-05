@@ -36,23 +36,20 @@ export class TodoItem extends CoMap {
 	done = co.boolean
 }
 
-import { RawCoMap } from "cojson"
-export class Inbox extends CoList.Of(
-	co.ref((raw) =>
-		(raw as RawCoMap).get("type") === "todo" ? TodoItem : PersonalLink,
-	),
-) {}
-
+export class ListOfPersonalLinks extends CoList.Of(co.ref(PersonalLink)) {}
+export class ListOfPersonalTodoItems extends CoList.Of(co.ref(TodoItem)) {}
+export class ListOfPages extends CoList.Of(co.ref(Page)) {}
 export class UserProfile extends CoMap {
 	name = co.string
 	// avatar
 }
-
 export class UserRoot extends CoMap {
 	wantToLearn = co.ref(ListOfTopics)
 	learning = co.ref(ListOfTopics)
 	learned = co.ref(ListOfTopics)
-	inbox = co.ref(Inbox)
+	personalLinks = co.ref(ListOfPersonalLinks)
+	pages = co.ref(ListOfPages)
+	todos = co.ref(ListOfPersonalTodoItems)
 }
 
 export class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
@@ -79,6 +76,8 @@ export class LaAccount extends Account {
 					learning: ListOfTopics.create([], { owner: this }),
 					learned: ListOfTopics.create([], { owner: this }),
 					inbox: Inbox.create([], { owner: this }),
+					personalLinks: ListOfPersonalLinks.create([], { owner: this }),
+					pages: ListOfPages.create([], { owner: this }),
 				},
 				{ owner: this },
 			)
