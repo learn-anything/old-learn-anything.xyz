@@ -49,7 +49,7 @@ export function Filter(props: Props) {
 								exit={{ opacity: 0, scale: 0.8 }}
 								animate={{ scale: [0.8, 1.04, 1], opacity: [0, 1] }}
 								transition={{ duration: 0.22, easing: "ease-out" }}
-								className="absolute top-10 w-full min-w-fit left-0 bg-hoverDark p-1 rounded-[7px]"
+								className="absolute top-10 w-full min-w-fit justify-center left-0 bg-hoverDark rounded-[7px] space-y-2"
 								style={{
 									border: "1px solid #1E1E1E",
 									background: "rgba(55, 55, 55, 0.40)",
@@ -66,7 +66,7 @@ export function Filter(props: Props) {
 												}
 												setExpanded(false)
 											}}
-											className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
+											className="rounded-[7px] h-[34px] px-[11px] flex flex-col space-y-2 hover:bg-softDarkText/10 text-white/60"
 										>
 											{filter}
 										</div>
@@ -81,7 +81,7 @@ export function Filter(props: Props) {
 					return (
 						<div
 							key={index}
-							className="bg-hoverDark rounded-[7px]  px-[11px] flex-center text-white/60"
+							className="bg-hoverDark rounded-[7px] px-[11px] flex-center text-white/60 gap-10"
 						>
 							{filter}
 						</div>

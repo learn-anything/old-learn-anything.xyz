@@ -25,11 +25,11 @@ export default function Sidebar(props: {
 	return (
 		<div className=" flex flex-col justify-between h-screen min-w-[200px] bg-dark text-textGray ">
 			<div>
-				<div className="flex-between m-[20px] mr-[2px]">
+				<div className="flex-between m-[20px] mr-[2px] flex flex-row justify-between px-2">
 					<icons.LearnAnythinglogo />
-					<div className="px-4 w-[50%] h-[50px] flex-center rounded-xl text-white/30 bg-hoverDark">
+					<div className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/30 bg-neutral-700">
 						<div className="flex items-center w-full">
-							<IoSearch className="w-9 h-9" />
+							<IoSearch className="w-9 h-9 mr-2" />
 							<input
 								type="text"
 								className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-white/30"
@@ -66,7 +66,7 @@ export default function Sidebar(props: {
 								<div
 									key={index}
 									onClick={() => {
-										props.topicTitle?.set(page)
+										props.topicTitle?.set({})
 									}}
 									className="text-white/60 px-3 p-[6px] cursor-pointer mb-[2px] hover:bg-hoverDark rounded-[7px] transition-all"
 								>
