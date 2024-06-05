@@ -57,7 +57,6 @@ async function home() {
 		{ globalLink: globalLink2, type: "personalLink" },
 		{ owner: user },
 	)
-
 	user.root.inbox.push(personalLink1)
 	user.root.inbox.push(personalLink2)
 

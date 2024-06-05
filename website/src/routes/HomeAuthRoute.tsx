@@ -3,9 +3,11 @@ import Icon from "../components/Icons"
 import PersonalLink from "../components/PersonalLink"
 import Sidebar from "../components/Sidebar"
 import { useAccount } from "../main"
+import { useState } from "react"
 
 export default function HomeAuthRoute() {
 	const { me } = useAccount({ root: { inbox: [{}] } })
+	// const global = me.private
 	const local = proxy({
 		showView: "All",
 		// TODO: move pages to jazz seed
@@ -13,14 +15,12 @@ export default function HomeAuthRoute() {
 			{
 				title: "physics",
 				prettyName: "Physics",
-				pageUrl: "hi",
-				content: "I hate Physics!",
+				content: "Physics is great",
 			},
 			{
 				title: "karabiner",
 				prettyName: "Karabiner",
-				pageUrl: "hi",
-				content: "???",
+				content: "Karabiner is great",
 			},
 		],
 		// TODO: get from jazz
@@ -47,10 +47,24 @@ export default function HomeAuthRoute() {
 			},
 		],
 		showNewTodoOrLink: false,
+		// inputValue: "Testing",
 	})
+
+	const [inputValue, setInputValue] = useState("")
 
 	return (
 		<>
+			<input
+				type="text"
+				// value={local.inputValue}
+				value={inputValue}
+				onChange={(e) => {
+					// console.log(e.target.value, "e")
+					// local.inputValue = e.target.value
+					setInputValue(e.target.value)
+				}}
+				className="p-2 rounded-md border border-gray-300"
+			/>
 			<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
 				<Sidebar personalPages={local.pages} />
 				<div className="p-2 w-full">
