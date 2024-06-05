@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Icon from "../components/Icons"
-import Page from "../components/Page"
 import Sidebar from "../components/Sidebar"
 import { useAccount } from "../main"
+import NewTodoOrLink from "../components/NewTodoOrLink"
+import PersonalLink from "../components/PersonalLink"
 
 export default function HomeAuthRoute() {
 	const { me } = useAccount({ root: { inbox: [{}] } })
@@ -46,28 +47,52 @@ export default function HomeAuthRoute() {
 			dateAdded: "April 20, 2024",
 		},
 	])
-	const [showPlusBar, setShowPlusBar] = useState(false)
+	const [showNewTodoOrLink, setShowNewTodoOrLink] = useState(false)
+	// const [showPlusBar, setShowPlusBar] = useState(false)
+
+	function addTodoOrLink() {
+		setShowNewTodoOrLink(true)
+	}
 
 	return (
 		<>
 			<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
 				<Sidebar personalPages={pages} />
 				<div className="p-2 w-full">
-					<Page showView={showView} links={personalLinks as any} />
+					<PersonalLink
+						showView={showView}
+						links={personalLinks as any}
+						showNewTodoOrLink={showNewTodoOrLink}
+					/>
 				</div>
 				<div
 					onClick={() => {
-						setShowPlusBar(!showPlusBar)
+						addTodoOrLink()
 					}}
-					className="absolute bottom-5 w-[50px] h-[50px] flex-center z-60 rounded-full transition-all bg-blue-500 right-5"
+					className="absolute flex items-center justify-center bottom-5 w-[50px] h-[50px] z-60 rounded-full transition-all bg-blue-500 right-5"
 				>
 					<Icon name="Plus" />
-
-					{showPlusBar ? (
-						<div className="absolute bottom-1 right-1 bg-blue-600 z-50 w-[200px] h-[400px] rounded-[11px]"></div>
-					) : null}
 				</div>
 			</div>
 		</>
 	)
+}
+
+{
+	/* <div
+onClick={() => {
+	addTodoOrLink()
+	setShowPlusBar(!showPlusBar)
+}}
+className="absolute bottom-5 w-[50px] h-[50px] flex-center z-60 rounded-full transition-all bg-blue-500 right-5"
+>
+<Icon name="Plus" />
+{showPlusBar ? (
+	<div className="absolute bottom-1 right-1 bg-blue-600 z-50 w-[200px] h-[400px] rounded-[11px]"></div>
+) : null}
+</div>
+</div>
+</>
+)
+} */
 }
