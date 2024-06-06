@@ -1,7 +1,7 @@
-import ProfileEdit from "../components/ProfileEdit"
+import Profile from "../components/Profile"
 import Sidebar from "../components/Sidebar"
 
-export default function ProfileEditRoute() {
+export default function ProfileRoute() {
 	return (
 		<>
 			<div className="flex flex-col h-screen py-3">
@@ -10,7 +10,7 @@ export default function ProfileEditRoute() {
 						<Sidebar personalPages={[]} />
 					</div>
 					<div className="flex-1 flex flex-col border border-neutral-800 rounded-3xl">
-						<ProfileEdit />
+						<Profile />
 					</div>
 				</div>
 			</div>

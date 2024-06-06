@@ -6,7 +6,8 @@ import "./index.css"
 import HomeAuthRoute from "./routes/HomeAuthRoute"
 import TestRoute from "./routes/TestRoute"
 import ProfileEditRoute from "./routes/ProfileEditRoute"
-import Profile from "./components/Profile"
+import ProfileRoute from "./routes/ProfileRoute"
+// import Profile from "./components/Profile"
 import { LaAccount } from "./schema"
 
 const router = createBrowserRouter([
@@ -20,14 +21,18 @@ const router = createBrowserRouter([
 		element: <TestRoute />,
 	},
 	{
+		path: "/accounts",
+		element: <ProfileRoute />,
+	},
+	{
 		path: "/accounts/edit",
 		element: <ProfileEditRoute />,
 	},
-	{
-		// TODO: make dynamic routes
-		path: `@$/{username}`,
-		element: <Profile />,
-	},
+	// {
+	// 	// TODO: make dynamic routes
+	// 	path: `@$/{username}`,
+	// 	element: <Profile />,
+	// },
 ])
 
 const Jazz = createJazzReactContext({
