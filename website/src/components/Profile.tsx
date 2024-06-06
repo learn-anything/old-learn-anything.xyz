@@ -2,7 +2,7 @@ import { useState } from "react"
 import Icon from "./Icons"
 
 export default function Profile() {
-	const [website, setWebsite] = useState("")
+	const [username, setUsername] = useState("")
 	return (
 		<div>
 			<div className="flex-between h-[74px] p-[20px]">
@@ -23,17 +23,17 @@ export default function Profile() {
 						<input
 							type="text"
 							placeholder="Username"
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
 							className="bg-[#121212] placeholder:font-light outline-none rounded-[10px] placeholder-white/20 text-white/30 w-[400px] px-[14px] p-[13px]"
 						/>
 					</div>
 					<div className="flex flex-col space-y-4 pt-[10px] text-white/20">
-						<p>learn-anything.xyz/@{website}</p>
+						<p>learn-anything.xyz/@{username}</p>
 						<input
 							type="text"
 							placeholder="Website"
 							className="bg-[#121212] placeholder:font-light outline-none rounded-[10px] placeholder-white/20 w-[400px] px-[14px] p-[13px]"
-							value={website}
-							onChange={(e) => setWebsite(e.target.value)}
 						/>
 						<input
 							type="text"
