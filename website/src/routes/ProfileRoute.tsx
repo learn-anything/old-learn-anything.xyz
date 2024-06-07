@@ -1,7 +1,14 @@
 import Profile from "../components/Profile"
 import Sidebar from "../components/Sidebar"
+import { useParams } from "react-router-dom"
 
-export default function ProfileRoute() {
+const ProfileRoute = () => {
+	const { username } = useParams<{ username: string }>()
+
+	if (!username) {
+		return <div>Username is not found</div>
+	}
+
 	return (
 		<>
 			<div className="flex flex-col h-screen py-3">
@@ -10,10 +17,12 @@ export default function ProfileRoute() {
 						<Sidebar personalPages={[]} />
 					</div>
 					<div className="flex-1 flex flex-col border border-neutral-800 rounded-3xl">
-						<Profile />
+						<Profile username={username} />
 					</div>
 				</div>
 			</div>
 		</>
 	)
 }
+
+export default ProfileRoute

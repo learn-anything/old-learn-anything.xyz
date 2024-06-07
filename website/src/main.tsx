@@ -7,8 +7,8 @@ import HomeAuthRoute from "./routes/HomeAuthRoute"
 import TestRoute from "./routes/TestRoute"
 import ProfileEditRoute from "./routes/ProfileEditRoute"
 import ProfileRoute from "./routes/ProfileRoute"
-// import Profile from "./components/Profile"
 import { LaAccount } from "./schema"
+import PersonalPageRoute from "./routes/PersonalPageRoute"
 
 const router = createBrowserRouter([
 	{
@@ -21,17 +21,16 @@ const router = createBrowserRouter([
 		element: <TestRoute />,
 	},
 	{
-		path: "/accounts",
-		element: <ProfileRoute />,
-	},
-	{
-		path: "/accounts/edit",
+		path: "/edit-profile",
 		element: <ProfileEditRoute />,
 	},
+	{
+		path: "/account/:username",
+		element: <ProfileRoute />,
+	},
 	// {
-	// 	// TODO: make dynamic routes
-	// 	path: `@$/{username}`,
-	// 	element: <Profile />,
+	// 	path: "/@:username/:page-name",
+	// 	element: <PersonalPageRoute />,
 	// },
 ])
 
