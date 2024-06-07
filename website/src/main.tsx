@@ -8,7 +8,7 @@ import TestRoute from "./routes/TestRoute"
 import ProfileEditRoute from "./routes/ProfileEditRoute"
 import ProfileRoute from "./routes/ProfileRoute"
 import { LaAccount } from "./schema"
-import PersonalPageRoute from "./routes/PersonalPageRoute"
+// import PersonalPageRoute from "./routes/PersonalPageRoute"
 
 const router = createBrowserRouter([
 	{
@@ -25,8 +25,12 @@ const router = createBrowserRouter([
 		element: <ProfileEditRoute />,
 	},
 	{
-		path: "/account/:username",
+		path: "/:username",
 		element: <ProfileRoute />,
+	},
+	{
+		path: "*",
+		element: <HomeAuthRoute />,
 	},
 	// {
 	// 	path: "/@:username/:page-name",
