@@ -47,28 +47,12 @@ export const HomeAuthRouteState = proxy({
 export default function HomeAuthRoute() {
 	const local = useProxy(HomeAuthRouteState)
 	const global = useAccount({
-		// {} = loads all primitive fields
-		// {} = can include references to load inside the object
 		root: { pages: [{}], personalLinks: [{ globalLink: {} }], todos: [{}] },
 	}).me?.root
-
 	if (!global) return <></>
 
 	return (
 		<>
-			<div className="text-white">
-				{global.personalLinks.map((personalLink) => {
-					return <div key={personalLink.id}>{personalLink.globalLink.url}</div>
-				})}
-			</div>
-			<input
-				type="text"
-				value={global.personalLinks[1].note}
-				onChange={(e) => {
-					global.personalLinks[1].note = e.target.value
-				}}
-				className="p-2 rounded-md border border-gray-300"
-			/>
 			<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
 				<Sidebar personalPages={local.pages} />
 				<div className="p-2 w-full">

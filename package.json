@@ -1,6 +1,7 @@
 {
 	"name": "learn-anything",
 	"scripts": {
+		"dev": "bun run web",
 		"web": "cd website && bun dev",
 		"seed": "bun --watch cli/seed.ts",
 		"cli": "bun --watch cli/run.ts",
