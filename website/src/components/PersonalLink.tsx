@@ -4,6 +4,7 @@ import Button from "./Button"
 import Icon from "./Icons"
 import Topbar from "./Topbar"
 import NewTodoOrLink from "./NewTodoOrLink"
+import { HomeAuthRouteState } from "../routes/HomeAuthRoute"
 
 interface Props {
 	showView: string
@@ -17,7 +18,10 @@ export default function PersonalLink(props: Props) {
 
 	const addLink = (link: any) => {
 		setLinks([...links, link])
+		HomeAuthRouteState.showNewTodoOrLink = false
+		HomeAuthRouteState.rotateIcon = false
 	}
+
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
 			<Topbar
@@ -32,11 +36,11 @@ export default function PersonalLink(props: Props) {
 				)}
 				{links.map((link, index) => (
 					<ProfileLink
-						index={index}
 						key={index}
 						link={link}
 						expandedLink={expandedLink}
 						setExpandedLink={setExpandedLink}
+						index={index}
 						showNewTodoOrLink={props.showNewTodoOrLink}
 					/>
 				))}

@@ -5,6 +5,7 @@ interface NewTodoOrLinkProps {
 }
 interface TextInputProps {
 	inputValue: string
+	date?: number
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 	errorMessage?: string
 }
@@ -15,7 +16,7 @@ const TextInput: React.FC<TextInputProps> = ({
 	errorMessage,
 }) => (
 	<input
-		type="text"
+		type="text || url"
 		placeholder={errorMessage || "Write a todo or paste link"}
 		value={inputValue}
 		onChange={onChange}
@@ -23,7 +24,7 @@ const TextInput: React.FC<TextInputProps> = ({
 	/>
 )
 
-const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
+const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	const [title, setTitle] = useState("")
 
 	useEffect(() => {
@@ -38,11 +39,11 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 	}, [inputValue])
 
 	return (
-		<div className="bg-[#181818] rounded-lg p-2">
+		<div className="bg-[#181818] w-full rounded-lg p-2">
 			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row space-x-3 px-2 items-center">
 					<h2 className="text-base">{title}</h2>
-					<p className="text-neutral-700 text-sm font-light">2024</p>
+					<p className="text-neutral-700 text-sm font-light">{date}</p>
 				</div>
 				<Icon name="Link" height="20" width="30" border="gray" />
 			</div>
@@ -67,6 +68,7 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 	const [inputValue, setInputValue] = useState("")
 	const [isUrlInput, setIsUrlInput] = useState(false)
+	const [showInput, setShowInput] = useState(true)
 
 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value)
@@ -81,6 +83,7 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 		if (inputValue.trim()) {
 			addLink({ title: inputValue, date: new Date().toISOString() })
 			setInputValue("")
+			setShowInput(false)
 		}
 	}
 
@@ -91,8 +94,61 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 			) : (
 				<TextInput inputValue={inputValue} onChange={inputChange} />
 			)}
+			<button
+				type="submit"
+				className="mt-2 bg-gray text-white font-bold py-2 px-4 rounded"
+			>
+				Add
+			</button>
 		</form>
 	)
 }
+
+// const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
+// 	const [inputValue, setInputValue] = useState("")
+// 	const [isUrlInput, setIsUrlInput] = useState(false)
+// 	const [title, setTitle] = useState("")
+// 	const [url, setUrl] = useState("")
+
+// 	const createLink = () => {
+// 		if (title && url) {
+// 			addLink({ title, url })
+// 			setTitle("")
+// 			setUrl("")
+// 		}
+// 	}
+
+// 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+// 		setInputValue(event.target.value)
+// 		setIsUrlInput(
+// 			event.target.value.startsWith("http://") ||
+// 				event.target.value.startsWith("https://"),
+// 		)
+// 	}
+
+// 	const createNewTodoOrLink = (event: React.FormEvent) => {
+// 		event.preventDefault()
+// 		if (inputValue.trim()) {
+// 			addLink({ title: inputValue, date: 2024 })
+// 			setInputValue("")
+// 		}
+// 	}
+
+// 	return (
+// 		<form onSubmit={createNewTodoOrLink}>
+// 			{isUrlInput ? (
+// 				<UrlInput inputValue={inputValue} onChange={inputChange} />
+// 			) : (
+// 				<TextInput inputValue={inputValue} onChange={inputChange} />
+// 			)}
+// 			<button
+// 				onClick={createLink}
+// 				className="mt-2 bg-gray text-white font-bold py-2 px-4 rounded"
+// 			>
+// 				Add Link
+// 			</button>
+// 		</form>
+// 	)
+// }
 
 export default NewTodoOrLink
