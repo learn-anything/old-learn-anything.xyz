@@ -416,8 +416,8 @@ export const icons = {
 	),
 	Plus: (props) => (
 		<svg
-			width={props.width ? props.width : "20"}
-			height={props.height ? props.height : "20"}
+			width={props.width ? props.width : "25"}
+			height={props.height ? props.height : "25"}
 			fill="none"
 			viewBox="0 0 24 24"
 		>

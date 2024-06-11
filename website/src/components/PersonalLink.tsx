@@ -13,7 +13,11 @@ interface Props {
 }
 export default function PersonalLink(props: Props) {
 	const [expandedLink, setExpandedLink] = useState<string | null>(null)
+	const [links, setLinks] = useState<any[]>(props.links)
 
+	const addLink = (link: any) => {
+		setLinks([...links, link])
+	}
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
 			<Topbar
@@ -23,18 +27,18 @@ export default function PersonalLink(props: Props) {
 			<div className="px-5">
 				{props.showNewTodoOrLink && (
 					<div>
-						<NewTodoOrLink />
+						<NewTodoOrLink addLink={addLink} />
 					</div>
 				)}
-				{props.links.map((link, index) => (
-					<div key={index}>
-						<ProfileLink
-							link={link}
-							expandedLink={expandedLink}
-							setExpandedLink={setExpandedLink}
-							showNewTodoOrLink={props.showNewTodoOrLink}
-						/>
-					</div>
+				{links.map((link, index) => (
+					<ProfileLink
+						index={index}
+						key={index}
+						link={link}
+						expandedLink={expandedLink}
+						setExpandedLink={setExpandedLink}
+						showNewTodoOrLink={props.showNewTodoOrLink}
+					/>
 				))}
 			</div>
 		</div>
@@ -47,6 +51,7 @@ function ProfileLink(props: {
 	expandedLink: string | null
 	setExpandedLink: (title: string | null) => void
 	showNewTodoOrLink: boolean
+	index: number
 }) {
 	const [hovered] = useState(false)
 	const handleAttachmentClick = (event: React.MouseEvent<HTMLDivElement>) => {

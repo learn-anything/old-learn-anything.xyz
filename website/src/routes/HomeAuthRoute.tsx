@@ -8,6 +8,7 @@ import { useAccount } from "../main"
 export const HomeAuthRouteState = proxy({
 	showView: "All",
 	inputValue: "Testing",
+	rotateIcon: false,
 	pages: [
 		{
 			title: "physics",
@@ -62,14 +63,27 @@ export default function HomeAuthRoute() {
 						showNewTodoOrLink={local.showNewTodoOrLink}
 					/>
 				</div>
-				<div
+				{local.showNewTodoOrLink && (
+					<div className="absolute z-2 bottom-10 right-10 bg-[#a1b3db] w-[180px] rounded-lg">
+						<div className="flex flex-col space-y-2 text-black mb-8 p-2">
+							<button className="text-left rounded-md bg-white/10 pl-2 py-1">
+								Link or Todo
+							</button>
+							<button className="text-left rounded-md bg-white/10 pl-2 py-1">
+								Page
+							</button>
+						</div>
+					</div>
+				)}
+				<button
 					onClick={() => {
-						local.showNewTodoOrLink = true
+						local.showNewTodoOrLink = !local.showNewTodoOrLink
+						local.rotateIcon = !local.rotateIcon
 					}}
-					className="absolute flex items-center justify-center bottom-5 w-[50px] h-[50px] z-60 rounded-full transition-all bg-blue-500 right-5"
+					className={`fixed z-1 flex items-center justify-center bottom-5 w-[50px] h-[50px] rounded-full transition-all bg-[#1f305c] right-5 ${local.rotateIcon ? "rotate-45" : ""}`}
 				>
 					<Icon name="Plus" />
-				</div>
+				</button>
 			</div>
 		</>
 	)
