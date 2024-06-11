@@ -27,6 +27,7 @@ const TextInput: React.FC<TextInputProps> = ({
 const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	const [title, setTitle] = useState("")
 
+	// fix title
 	useEffect(() => {
 		fetch(inputValue)
 			.then((response) => response.text())
@@ -43,22 +44,32 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row space-x-3 px-2 items-center">
 					<h2 className="text-base">{title}</h2>
-					<p className="text-neutral-700 text-sm font-light">{date}</p>
+					<p className="text-neutral-700 text-sm font-light">2024</p>
 				</div>
 				<Icon name="Link" height="20" width="30" border="gray" />
 			</div>
-			<div className="flex flex-row pt-2 space-x-2 items-center">
-				<button className="bg-neutral-700/20 rounded-lg px-2 py-1 flex flex-row items-center">
-					<p className="pr-2">No Topic</p>
-					<Icon name="ThinArrowDown" height="20" width="30" border="gray" />
-				</button>
-				<div className="flex flex-row items-center">
-					<Icon name="Note" height="20" width="30" border="gray" />
-					<input
-						type="text"
-						className="text-neutral-700 placeholder:text-neutral-700 text-base w-[1000px] font-light px-2 bg-transparent rounded-md outline-none focus:ring-0"
-						placeholder="Take a note..."
-					/>
+			<p className="m-2 text-white/50">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, officia.
+				Delectus in dolor quam praesentium laborum velit iusto
+			</p>
+			<div className="flex flex-row pt-2 justify-between items-center">
+				<div className="flex flex-row pt-2 space-x-2 items-center">
+					<button className="bg-neutral-700/20 text-white/50 flex flex-row rounded-lg px-2 py-1 items-center whitespace-nowrap">
+						<p className="pr-2">No Topic</p>
+						<Icon name="ThinArrowDown" height="20" width="30" border="gray" />
+					</button>
+					<div className="flex flex-row items-center">
+						<Icon name="Note" height="20" width="30" border="gray" />
+						<input
+							type="text"
+							className="text-neutral-600 placeholder:text-neutral-600 text-base w-[1000px] font-normal px-2 bg-transparent rounded-md outline-none focus:ring-0"
+							placeholder="Take a note..."
+						/>
+					</div>
+				</div>
+				<div className="flex flex-row items-center opacity-50">
+					<Icon name="Options" height="22" width="32" border="gray" />
+					<Icon name="Heart" height="22" width="32" border="gray" />
 				</div>
 			</div>
 		</div>
@@ -81,7 +92,7 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 	const createNewTodoOrLink = (event: React.FormEvent) => {
 		event.preventDefault()
 		if (inputValue.trim()) {
-			addLink({ title: inputValue, date: new Date().toISOString() })
+			addLink({ title: inputValue })
 			setInputValue("")
 			setShowInput(false)
 		}
@@ -103,52 +114,5 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 		</form>
 	)
 }
-
-// const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
-// 	const [inputValue, setInputValue] = useState("")
-// 	const [isUrlInput, setIsUrlInput] = useState(false)
-// 	const [title, setTitle] = useState("")
-// 	const [url, setUrl] = useState("")
-
-// 	const createLink = () => {
-// 		if (title && url) {
-// 			addLink({ title, url })
-// 			setTitle("")
-// 			setUrl("")
-// 		}
-// 	}
-
-// 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-// 		setInputValue(event.target.value)
-// 		setIsUrlInput(
-// 			event.target.value.startsWith("http://") ||
-// 				event.target.value.startsWith("https://"),
-// 		)
-// 	}
-
-// 	const createNewTodoOrLink = (event: React.FormEvent) => {
-// 		event.preventDefault()
-// 		if (inputValue.trim()) {
-// 			addLink({ title: inputValue, date: 2024 })
-// 			setInputValue("")
-// 		}
-// 	}
-
-// 	return (
-// 		<form onSubmit={createNewTodoOrLink}>
-// 			{isUrlInput ? (
-// 				<UrlInput inputValue={inputValue} onChange={inputChange} />
-// 			) : (
-// 				<TextInput inputValue={inputValue} onChange={inputChange} />
-// 			)}
-// 			<button
-// 				onClick={createLink}
-// 				className="mt-2 bg-gray text-white font-bold py-2 px-4 rounded"
-// 			>
-// 				Add Link
-// 			</button>
-// 		</form>
-// 	)
-// }
 
 export default NewTodoOrLink

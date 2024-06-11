@@ -79,7 +79,7 @@ export default function HomeAuthRoute() {
 				<button
 					onClick={() => {
 						local.showNewTodoOrLink = !local.showNewTodoOrLink
-						local.rotateIcon = local.showNewTodoOrLink // Обновляем rotateIcon в зависимости от showNewTodoOrLink
+						local.rotateIcon = local.showNewTodoOrLink // fix this idk
 					}}
 					className={`fixed z-1 flex items-center justify-center bottom-5 w-[50px] h-[50px] rounded-full transition-all bg-[#1f305c] right-5 ${local.rotateIcon ? "rotate-45" : ""}`}
 				>
