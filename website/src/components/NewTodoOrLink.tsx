@@ -39,11 +39,21 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 			.catch(() => setTitle(inputValue))
 	}, [inputValue])
 
+	const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value)
+	}
+
 	return (
 		<div className="bg-[#181818] w-full rounded-lg p-2">
 			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row space-x-3 px-2 items-center">
-					<h2 className="text-base">{title}</h2>
+					{/* fix so that the auto title is displayed */}
+					<input
+						type="text"
+						value={title}
+						onChange={changeTitle}
+						className="text-base bg-transparent outline-none focus:ring-0 focus:outline-none text-white"
+					/>
 					<p className="text-neutral-700 text-sm font-light">2024</p>
 				</div>
 				<Icon name="Link" height="20" width="30" border="gray" />
