@@ -1,72 +1,84 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Icon from "./Icons"
-
 interface NewTodoOrLinkProps {
 	addLink: (link: any) => void
 }
-
 interface TextInputProps {
 	inputValue: string
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+	errorMessage?: string
 }
 
-const TextInput: React.FC<TextInputProps> = ({ inputValue, onChange }) => (
+const TextInput: React.FC<TextInputProps> = ({
+	inputValue,
+	onChange,
+	errorMessage,
+}) => (
 	<input
 		type="text"
-		placeholder="Write a todo or paste link"
+		placeholder={errorMessage || "Write a todo or paste link"}
 		value={inputValue}
 		onChange={onChange}
 		className="flex flex-row items-center w-full justify-between bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-xl p-3 pl-5 h-full ml-3"
 	/>
 )
 
-const UrlInput: React.FC<{ inputValue: string }> = ({ inputValue }) => (
-	<div className="bg-[#181818] rounded-md p-2">
-		<div className="flex flex-row justify-between items-center">
-			<div className="flex flex-row space-x-3 px-2 items-center">
-				<h2 className="text-base">{inputValue}</h2>
-				<p className="text-neutral-700 text-sm font-light">
-					{new Date().getFullYear()}
-				</p>
+const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
+	const [title, setTitle] = useState("")
+
+	useEffect(() => {
+		fetch(inputValue)
+			.then((response) => response.text())
+			.then((html) => {
+				const doc = new DOMParser().parseFromString(html, "text/html")
+				const titleElement = doc.querySelectorAll("title")[0]
+				setTitle(titleElement ? titleElement.innerText : inputValue)
+			})
+			.catch(() => setTitle(inputValue))
+	}, [inputValue])
+
+	return (
+		<div className="bg-[#181818] rounded-lg p-2">
+			<div className="flex flex-row justify-between items-center">
+				<div className="flex flex-row space-x-3 px-2 items-center">
+					<h2 className="text-base">{title}</h2>
+					<p className="text-neutral-700 text-sm font-light">2024</p>
+				</div>
+				<Icon name="Link" height="20" width="30" border="gray" />
 			</div>
-			<Icon name="Link" height="20" width="30" border="gray" />
+			<div className="flex flex-row pt-2 space-x-2 items-center">
+				<button className="bg-neutral-700/20 rounded-lg px-2 py-1 flex flex-row items-center">
+					<p className="pr-2">No Topic</p>
+					<Icon name="ThinArrowDown" height="20" width="30" border="gray" />
+				</button>
+				<div className="flex flex-row items-center">
+					<Icon name="Note" height="20" width="30" border="gray" />
+					<input
+						type="text"
+						className="text-neutral-700 placeholder:text-neutral-700 text-base w-[1000px] font-light px-2 bg-transparent rounded-md outline-none focus:ring-0"
+						placeholder="Take a note..."
+					/>
+				</div>
+			</div>
 		</div>
-		<p className="text-neutral-700 text-sm font-light px-2">
-			Lorem ipsum dolor sit amet consectetur adipisicing elit
-		</p>
-	</div>
-)
+	)
+}
 
 const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 	const [inputValue, setInputValue] = useState("")
 	const [isUrlInput, setIsUrlInput] = useState(false)
-	const [urlError, setUrlError] = useState("")
 
 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value)
-		setIsUrlInput(false)
-		setUrlError("")
+		setIsUrlInput(
+			event.target.value.startsWith("http://") ||
+				event.target.value.startsWith("https://"),
+		)
 	}
 
 	const createNewTodoOrLink = (event: React.FormEvent) => {
 		event.preventDefault()
-		if (inputValue.startsWith("http://") || inputValue.startsWith("https://")) {
-			fetch(inputValue)
-				.then((response) => response.text())
-				.then((html) => {
-					const doc = new DOMParser().parseFromString(html, "text/html")
-					const title = doc.querySelector("title")
-					if (title) {
-						setInputValue(title.innerText)
-						setIsUrlInput(true)
-					}
-				})
-				.catch(() => {
-					setIsUrlInput(false)
-					setUrlError("Invalid link, check the URL and try again")
-					setTimeout(() => setUrlError(""), 2000)
-				})
-		} else {
+		if (inputValue.trim()) {
 			addLink({ title: inputValue, date: new Date().toISOString() })
 			setInputValue("")
 		}
@@ -74,9 +86,8 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 
 	return (
 		<form onSubmit={createNewTodoOrLink}>
-			{urlError && <p className="text-[#ff004bed] text-center">{urlError}</p>}
 			{isUrlInput ? (
-				<UrlInput inputValue={inputValue} />
+				<UrlInput inputValue={inputValue} onChange={inputChange} />
 			) : (
 				<TextInput inputValue={inputValue} onChange={inputChange} />
 			)}
