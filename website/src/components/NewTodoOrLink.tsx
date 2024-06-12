@@ -26,6 +26,7 @@ const TextInput: React.FC<TextInputProps> = ({
 
 const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	const [title, setTitle] = useState("")
+	const [description, setDescription] = useState("")
 
 	// fix title
 	useEffect(() => {
@@ -43,8 +44,12 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 		setTitle(event.target.value)
 	}
 
+	const changeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setDescription(event.target.value)
+	}
+
 	return (
-		<div className="bg-[#181818] w-full rounded-lg p-2">
+		<div className="bg-[#181818] w-full rounded-lg p-2 pb-2">
 			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row space-x-3 px-2 items-center">
 					{/* fix so that the auto title is displayed */}
@@ -58,11 +63,14 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 				</div>
 				<Icon name="Link" height="20" width="30" border="gray" />
 			</div>
-			<p className="m-2 text-white/50">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, officia.
-				Delectus in dolor quam praesentium laborum velit iusto
-			</p>
-			<div className="flex flex-row pt-2 justify-between items-center">
+			<input
+				type="text"
+				placeholder="Add description"
+				value={description}
+				onChange={changeDescription}
+				className="text-base p-2 bg-transparent outline-none focus:ring-0 focus:outline-none text-white/50 placeholder:text-white/30"
+			/>
+			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row pt-2 space-x-2 items-center">
 					<button className="bg-neutral-700/20 text-white/50 flex flex-row rounded-lg px-2 py-1 items-center whitespace-nowrap">
 						<p className="pr-2">No Topic</p>
@@ -115,12 +123,12 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 			) : (
 				<TextInput inputValue={inputValue} onChange={inputChange} />
 			)}
-			<button
+			{/* <button
 				type="submit"
 				className="mt-2 bg-gray text-white font-bold py-2 px-4 rounded"
 			>
 				Add
-			</button>
+			</button> */}
 		</form>
 	)
 }

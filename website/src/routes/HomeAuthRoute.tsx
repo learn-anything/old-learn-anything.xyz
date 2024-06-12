@@ -64,7 +64,7 @@ export default function HomeAuthRoute() {
 						showNewTodoOrLink={local.showNewTodoOrLink}
 					/>
 				</div>
-				{local.showNewTodoOrLink && (
+				{/* {local.showNewTodoOrLink && (
 					<div className="absolute z-2 bottom-10 right-10 bg-[#a1b3db] w-[180px] rounded-lg">
 						<div className="flex flex-col space-y-2 text-black mb-8 p-2">
 							<button className="text-left rounded-md bg-white/10 pl-2">
@@ -75,7 +75,7 @@ export default function HomeAuthRoute() {
 							</button>
 						</div>
 					</div>
-				)}
+				)} */}
 				<button
 					onClick={() => {
 						local.showNewTodoOrLink = !local.showNewTodoOrLink
