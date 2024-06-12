@@ -16,10 +16,11 @@ const TextInput: React.FC<TextInputProps> = ({
 	errorMessage,
 }) => (
 	<input
-		type="text || url"
+		type="text"
 		placeholder={errorMessage || "Write a todo or paste link"}
 		value={inputValue}
 		onChange={onChange}
+		autoFocus
 		className="flex flex-row items-center w-full justify-between bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-xl p-3 pl-5 h-full ml-3"
 	/>
 )
@@ -30,17 +31,6 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	// fix title
-	// useEffect(() => {
-	// 	fetch(inputValue)
-	// 		.then((response) => response.text())
-	// 		.then((html) => {
-	// 			const doc = new DOMParser().parseFromString(html, "text/html")
-	// 			const titleElement = doc.querySelectorAll("title")[0]
-	// 			setTitle(titleElement ? titleElement.innerText : inputValue)
-	// 		})
-	// 		.catch(() => setTitle(inputValue))
-	// }, [inputValue])
-
 	useEffect(() => {
 		if (inputRef.current) {
 			inputRef.current.style.width = `${inputRef.current.value.length + 1}ch`
@@ -71,7 +61,8 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 			<div className="flex flex-row justify-between items-center">
 				<div className="flex flex-row px-2 items-center relative">
 					<input
-						type="text"
+						type="url"
+						autoFocus
 						ref={inputRef}
 						value={title}
 						onChange={changeTitle}
