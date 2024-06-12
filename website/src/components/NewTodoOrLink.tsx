@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Icon from "./Icons"
 interface NewTodoOrLinkProps {
 	addLink: (link: any) => void
@@ -27,8 +27,26 @@ const TextInput: React.FC<TextInputProps> = ({
 const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	const [title, setTitle] = useState("")
 	const [description, setDescription] = useState("")
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	// fix title
+	// useEffect(() => {
+	// 	fetch(inputValue)
+	// 		.then((response) => response.text())
+	// 		.then((html) => {
+	// 			const doc = new DOMParser().parseFromString(html, "text/html")
+	// 			const titleElement = doc.querySelectorAll("title")[0]
+	// 			setTitle(titleElement ? titleElement.innerText : inputValue)
+	// 		})
+	// 		.catch(() => setTitle(inputValue))
+	// }, [inputValue])
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.style.width = `${inputRef.current.value.length + 1}ch`
+		}
+	}, [title])
+
 	useEffect(() => {
 		fetch(inputValue)
 			.then((response) => response.text())
@@ -51,13 +69,13 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
 	return (
 		<div className="bg-[#181818] w-full rounded-lg p-2 pb-2">
 			<div className="flex flex-row justify-between items-center">
-				<div className="flex flex-row space-x-3 px-2 items-center">
-					{/* fix so that the auto title is displayed */}
+				<div className="flex flex-row px-2 items-center relative">
 					<input
 						type="text"
+						ref={inputRef}
 						value={title}
 						onChange={changeTitle}
-						className="text-base bg-transparent outline-none focus:ring-0 focus:outline-none text-white"
+						className="flex-grow text-base bg-transparent outline-none focus:ring-0 focus:outline-none text-white"
 					/>
 					<p className="text-neutral-700 text-sm font-light">2024</p>
 				</div>
