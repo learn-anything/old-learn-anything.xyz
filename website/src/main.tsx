@@ -8,6 +8,7 @@ import TestRoute from "./routes/TestRoute"
 import ProfileEditRoute from "./routes/ProfileEditRoute"
 import ProfileRoute from "./routes/ProfileRoute"
 import { LaAccount } from "./schema"
+import GlobalTopicRoute from "./routes/GlobalTopicRoute"
 // import PersonalPageRoute from "./routes/PersonalPageRoute"
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
 	{
 		path: "*",
 		element: <HomeAuthRoute />,
+	},
+	{
+		path: "/globaltopic",
+		element: <GlobalTopicRoute />,
 	},
 	// {
 	// 	path: "/@:username/:page-name",
