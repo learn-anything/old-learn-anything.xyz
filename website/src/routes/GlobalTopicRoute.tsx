@@ -18,12 +18,12 @@ export default function GlobalTopicRoute() {
 
 	return (
 		<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
-			<Sidebar />
-			<div className="p-2 w-full">
-				<GlobalTopicTopbar
-					showView={Props.showView as "All" | "Links" | "Todos" | "Topics"}
-					setShowView={() => {}}
-				/>
+			<div className="w-1/6">
+				<Sidebar />
+			</div>
+			<div className="p-2 w-5/6">
+				<GlobalTopicTopbar />
+				<div> {/* Дополнительный div, если нужен */}</div>
 			</div>
 		</div>
 	)

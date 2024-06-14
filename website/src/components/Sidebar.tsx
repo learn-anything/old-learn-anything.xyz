@@ -2,7 +2,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
-import Icon, { icons } from "./Icons"
+import { icons } from "./Icons"
+import { useLocation } from "react-router-dom"
 
 export default function Sidebar(props: {
 	// personalPages: {
@@ -19,10 +20,13 @@ export default function Sidebar(props: {
 	const [expanded, setExpanded] = useState(false)
 	const [expandTimer, setExpandTimer] = useState(false)
 
+	const location = useLocation()
+	const currentPath = location.pathname
+
 	return (
 		<div className=" flex flex-col justify-between h-screen min-w-[200px] bg-dark text-textGray ">
 			<div>
-				<div className="flex-between m-[20px] mr-[2px] flex flex-row justify-between px-2">
+				<div className="flex-between m-[20px] mr-[2px] flex flex-row justify-between items-center">
 					<icons.LearnAnythinglogo />
 					<div className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]">
 						<div className="flex items-center w-full">
@@ -35,17 +39,21 @@ export default function Sidebar(props: {
 					</div>
 				</div>
 				<div className="col-gap-[8px] pl-2">
-					<div className="cursor-pointer px-3 text-white bg-[#1b1b1b] p-[8px] rounded-[7px] transition-all">
+					<div
+						className={`cursor-pointer px-3 text-white/70 ${currentPath === "/globaltopic" ? "" : "bg-[#1b1b1b]"} p-[8px] rounded-[7px] transition-all`}
+					>
 						Inbox
 					</div>
-					<div
-						className="cursor-pointer px-3 text-white/60 p-[6px] rounded-[7px] transition-all"
-						onClick={() => {
-							// props.setCurrentPage("MyLinks")
-						}}
-					>
-						Links
-					</div>
+					{currentPath !== "/globaltopic" && (
+						<div
+							className="cursor-pointer px-3 text-white/60 p-[6px] rounded-[7px] transition-all"
+							onClick={() => {
+								// props.setCurrentPage("MyLinks")
+							}}
+						>
+							Links
+						</div>
+					)}
 
 					{/* <div className="flex-between text-white/40">
 						<h2 className="text-white/20 text-[14px] px-3 p-2">Pages</h2>

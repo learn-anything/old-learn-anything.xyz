@@ -1,9 +1,6 @@
 import { useState } from "react"
 
-export default function GlobalTopicTopbar(props: {
-	showView: "All" | "Links" | "Todos" | "Topics"
-	setShowView: (view: "All" | "Links" | "Todos" | "Topics") => void
-}) {
+export default function GlobalTopicTopbar(props: {}) {
 	const [activeButton, setActiveButton] = useState<"Guide" | "All links">(
 		"Guide",
 	)
