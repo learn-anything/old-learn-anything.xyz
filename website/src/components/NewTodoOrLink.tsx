@@ -25,7 +25,7 @@ const TextInput: React.FC<TextInputProps> = ({
 	/>
 )
 
-const UrlInput: React.FC<TextInputProps> = ({ inputValue, date }) => {
+const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 	const [title, setTitle] = useState("")
 	const [description, setDescription] = useState("")
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -132,12 +132,6 @@ const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
 			) : (
 				<TextInput inputValue={inputValue} onChange={inputChange} />
 			)}
-			{/* <button
-				type="submit"
-				className="mt-2 bg-gray text-white font-bold py-2 px-4 rounded"
-			>
-				Add
-			</button> */}
 		</form>
 	)
 }
