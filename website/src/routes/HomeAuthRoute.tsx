@@ -56,7 +56,8 @@ export default function HomeAuthRoute() {
 	return (
 		<>
 			<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
-				<Sidebar personalPages={local.pages} />
+				{/* <Sidebar personalPages={local.pages} /> */}
+				<Sidebar />
 				<div className="p-2 w-full">
 					<PersonalLink
 						showView={local.showView}

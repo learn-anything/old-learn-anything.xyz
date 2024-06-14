@@ -10,7 +10,7 @@ import {
 import StarterKit from "@tiptap/starter-kit"
 import Placeholder from "@tiptap/extension-placeholder"
 import { useEffect } from "react"
-import { LinkOrder } from "../Topbar"
+// import { LinkOrder } from "../Topbar"
 import Sidebar from "../Sidebar"
 
 interface Props {}
@@ -66,18 +66,19 @@ export default observer(function EditorRoute(props: Props) {
 	return (
 		<>
 			<div className="text-white flex w-screen">
-				<Sidebar
+				{/* <Sidebar
 					personalPages={local.pages.get()}
 					topicTitle={local.pageContent}
-				/>
+				/> */}
+				<Sidebar />
 				<div className="px-4 w-full">
 					<div className="flex-between py-4">
 						<div className="text-[26px] font-bold">
 							{local.pageContent.prettyName.get()}
 						</div>
-						<div className="flex gap-1">
+						{/* <div className="flex gap-1">
 							<LinkOrder />
-						</div>
+						</div> */}
 					</div>
 					<EditorContent editor={editor} />
 				</div>

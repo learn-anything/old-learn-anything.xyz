@@ -5,11 +5,11 @@ import { IoSearch } from "react-icons/io5"
 import Icon, { icons } from "./Icons"
 
 export default function Sidebar(props: {
-	personalPages: {
-		title: string
-		prettyName: string
-		content: string
-	}[]
+	// personalPages: {
+	// 	title: string
+	// 	prettyName: string
+	// 	content: string
+	// }[]
 	// topicTitle?: Observable<typeof Page>
 	// setMode: (value: string) => void
 	// mode: string
@@ -46,18 +46,18 @@ export default function Sidebar(props: {
 					>
 						Links
 					</div>
-					<div className="">
-						<div className="flex-between text-white/40">
-							<div className="text-white/20 text-[14px] px-3 p-2">Pages</div>
-							<div
-								onClick={() => {
-									// props.setMode("Page")
-									// props.setCurrentPage("")
-								}}
-							>
-								<Icon name="Plus" />
-							</div>
+
+					{/* <div className="flex-between text-white/40">
+						<h2 className="text-white/20 text-[14px] px-3 p-2">Pages</h2>
+						<div
+							onClick={() => {
+								props.setMode("Page")
+								props.setCurrentPage("")
+							}}
+						>
+							<Icon name="Plus" />
 						</div>
+
 						{props.personalPages.map((page, index) => {
 							return (
 								<div
@@ -71,7 +71,7 @@ export default function Sidebar(props: {
 								</div>
 							)
 						})}
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div
