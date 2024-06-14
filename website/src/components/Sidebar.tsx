@@ -24,7 +24,7 @@ export default function Sidebar(props: {
 			<div>
 				<div className="flex-between m-[20px] mr-[2px] flex flex-row justify-between px-2">
 					<icons.LearnAnythinglogo />
-					<div className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/30 bg-neutral-700">
+					<div className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]">
 						<div className="flex items-center w-full">
 							<IoSearch className="w-9 h-9 mr-2" />
 							<input

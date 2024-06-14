@@ -55,6 +55,10 @@ body {
   scrollbar-width: none;
 }
 
-.shadow-inner-white {
-  box-shadow: 2px 4px 3px rgba(198, 196, 196, 0.1);
+.shadow-inner {
+	box-shadow: inset 0 1px 2px rgba(236, 236, 236, 0.1);
+}
+
+.shadow-outer {
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
