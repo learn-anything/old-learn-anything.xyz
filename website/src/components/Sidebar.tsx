@@ -99,7 +99,10 @@ export default function Sidebar(props: {
 					setExpandTimer(false)
 				}}
 			>
-				<div className="p-4">Profile</div>
+				<div className="p-4 flex flex-row space-x-2 items-center">
+					<div className="w-5 h-5 rounded-sm bg-neutral-600"></div>
+					<p className="text-base text-white/70">Profile</p>
+				</div>
 				<AnimatePresence>
 					{expanded ? (
 						<motion.div
