@@ -3,23 +3,18 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css"
+import GlobalTopicRoute from "./routes/GlobalTopicRoute"
 import HomeAuthRoute from "./routes/HomeAuthRoute"
-import TestRoute from "./routes/TestRoute"
 import ProfileEditRoute from "./routes/ProfileEditRoute"
 import ProfileRoute from "./routes/ProfileRoute"
+import TestRoute from "./routes/TestRoute"
 import { LaAccount } from "./schema"
-import GlobalTopicRoute from "./routes/GlobalTopicRoute"
-// import PersonalPageRoute from "./routes/PersonalPageRoute"
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		// TODO: render HomePublic if not auth'd
 		element: <HomeAuthRoute />,
-	},
-	{
-		path: "/test",
-		element: <TestRoute />,
 	},
 	{
 		path: "/edit-profile",
@@ -41,6 +36,10 @@ const router = createBrowserRouter([
 	// 	path: "/@:username/:page-name",
 	// 	element: <PersonalPageRoute />,
 	// },
+	{
+		path: "/test",
+		element: <TestRoute />,
+	},
 ])
 
 const Jazz = createJazzReactContext({

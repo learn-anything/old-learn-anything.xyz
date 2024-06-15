@@ -2,12 +2,15 @@
 	"name": "learn-anything",
 	"scripts": {
 		"dev": "bun run web",
-		"web": "cd website && bun dev",
+		"web": "cd web && bun dev",
 		"seed": "bun --watch cli/seed.ts",
 		"cli": "bun --watch cli/run.ts",
 		"state": "bun --watch cmd.ts jazz-state",
 		"edgedb:migrate": "edgedb migration create && edgedb migration apply && npx @edgedb/generate edgeql-js"
 	},
+	"workspaces": [
+		"web"
+	],
 	"dependencies": {
 		"@edgedb/auth-nextjs": "^0.3.1",
 		"@headlessui/react": "^2.0.4",

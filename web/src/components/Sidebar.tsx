@@ -4,6 +4,7 @@ import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import { icons } from "./Icons"
 import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Sidebar(props: {
 	// personalPages: {
@@ -19,6 +20,7 @@ export default function Sidebar(props: {
 }) {
 	const [expanded, setExpanded] = useState(false)
 	const [expandTimer, setExpandTimer] = useState(false)
+	const navigate = useNavigate()
 
 	const location = useLocation()
 	const currentPath = location.pathname
@@ -101,7 +103,7 @@ export default function Sidebar(props: {
 			>
 				<div className="p-4 flex flex-row space-x-2 items-center">
 					<div className="w-5 h-5 rounded-sm bg-neutral-600"></div>
-					<p className="text-base text-white/70">Profile</p>
+					<p className="text-base text-white/70 cursor-pointer">Profile</p>
 				</div>
 				<AnimatePresence>
 					{expanded ? (
@@ -118,14 +120,18 @@ export default function Sidebar(props: {
 						>
 							<div
 								onClick={() => {
-									// props.setMode("Profile")
-									// props.setCurrentPage("Profile")
+									navigate("/edit-profile")
 								}}
 								className="rounded-[7px] h-[34px] cursor-pointer whitespace-nowrap px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60"
 							>
-								Settings
+								Edit Profile
 							</div>
-							<div className="rounded-[7px] h-[34px] cursor-pointer whitespace-nowrap px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60">
+							<div
+								onClick={() => {
+									window.open("https://discord.gg/bxtD8x6aNF", "_blank")
+								}}
+								className="rounded-[7px] h-[34px] cursor-pointer whitespace-nowrap px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60"
+							>
 								Support
 							</div>
 							<div className="rounded-[7px] h-[34px] cursor-pointer whitespace-nowrap px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60">
