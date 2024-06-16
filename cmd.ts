@@ -1,5 +1,5 @@
 import { $ } from "bun"
-import { LaAccount } from "@/website/src/schema"
+import { LaAccount } from "@/web/src/schema"
 import { startWorker } from "jazz-nodejs"
 
 // TODO: make more robust

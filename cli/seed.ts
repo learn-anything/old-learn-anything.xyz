@@ -1,4 +1,4 @@
-import { GlobalLink, LaAccount, Page, PersonalLink } from "@/website/src/schema"
+import { GlobalLink, LaAccount, Page, PersonalLink } from "@/web/src/schema"
 import { startWorker } from "jazz-nodejs"
 import { Group } from "jazz-tools"
 import { RawControlledAccount } from "cojson"
@@ -78,7 +78,7 @@ async function home() {
 	}
 
 	await Bun.write(
-		"./website/.env",
+		"./web/.env",
 		`VITE_SEED_ACCOUNTS='${JSON.stringify({
 			nikiv: credentials,
 		})}'`,
