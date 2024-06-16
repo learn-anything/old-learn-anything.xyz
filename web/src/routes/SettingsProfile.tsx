@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar"
 import { useAccount } from "../main"
 import { useProxy } from "valtio/utils"
 import { checkIfUrl } from "../../lib/utils"
+import { errorToast } from "../../lib/react-utils"
+import { Toaster } from "react-hot-toast"
 
 const SettingsProfileState = proxy({
 	name: "",
@@ -21,6 +23,7 @@ export default function SettingsProfile() {
 
 	return (
 		<>
+			<Toaster />
 			<div className="flex flex-col h-screen py-3">
 				<div className="flex flex-1">
 					<div className="w-1/5 mr-2">
@@ -41,17 +44,17 @@ export default function SettingsProfile() {
 										type="text"
 										placeholder="Your name"
 										className="bg-[#121212] placeholder:font-light font-light outline-none rounded-[10px] placeholder-white/20 text-white/30 w-[400px] px-[14px] p-[13px]"
-										value={global.name}
+										value={local.name}
 										onChange={(e) => {
-											global.name = e.target.value
+											local.name = e.target.value
 										}}
 									/>
 									<input
 										type="text"
 										placeholder="Username"
-										value={global.username}
+										value={local.username}
 										onChange={(e) => {
-											global.username = e.target.value
+											local.username = e.target.value
 												.toLowerCase()
 												.replace(/\s+/g, "-")
 												.replace(/[^a-z0-9-]/g, "")
@@ -59,15 +62,15 @@ export default function SettingsProfile() {
 										className="bg-[#121212] placeholder:font-light outline-none rounded-[10px] placeholder-white/20 text-white/30 w-[400px] px-[14px] p-[13px]"
 									/>
 									<p className="text-white/30">
-										learn-anything.xyz/@{global.username}
+										learn-anything.xyz/@{local.username}
 									</p>
 									<input
 										type="text"
 										placeholder="Website"
 										className="bg-[#121212] placeholder:font-light outline-none rounded-[10px] placeholder-white/20 w-[400px] px-[14px] p-[13px] text-white/30"
-										value={global.website}
+										value={local.website}
 										onChange={(e) => {
-											return
+											local.website = e.target.value
 											// const isValidUrl = (url: string) => {
 											// 	try {
 											// 		new URL(url)
@@ -84,21 +87,23 @@ export default function SettingsProfile() {
 									<input
 										type="text"
 										placeholder="Bio"
-										className="bg-[#121212] font-light placeholder:font-light pt-2 outline-none rounded-[10px] placeholder-white/20 w-[400px] h-[120px] px-[14px] pb-[104px] text-left"
-										value={global.bio}
+										className="bg-[#121212] font-light placeholder:font-light pt-2 outline-none rounded-[10px] placeholder-white/20 w-[400px] h-[120px] px-[14px] pb-[104px] text-left text-white/30"
+										value={local.bio}
 										onChange={(e) => {
-											global.bio = e.target.value
+											local.bio = e.target.value
 										}}
 									/>
 								</div>
 								<button
 									onClick={() => {
+										if (!checkIfUrl(local.website)) {
+											errorToast("Website is not valid URL")
+											return
+										}
+										global.website = local.website
 										global.name = local.name
 										// TODO: check that username does not already exist in jazz. show red error if it does.
 										global.username = local.username
-										if (checkIfUrl(local.website)) {
-											global.website = local.website
-										}
 										global.bio = local.bio
 									}}
 									className="bg-[#121212] text-white/20 font-light outline-none rounded-[10px] py-2 px-4 mt-4 w-[120px] flex justify-center items-center whitespace-nowrap"
