@@ -120,7 +120,7 @@ export default function Sidebar(props: {
 						>
 							<div
 								onClick={() => {
-									navigate("/edit-profile")
+									navigate("/settings/profile")
 								}}
 								className="rounded-[7px] h-[34px] cursor-pointer whitespace-nowrap px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60"
 							>

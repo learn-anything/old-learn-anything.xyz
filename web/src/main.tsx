@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css"
 import GlobalTopicRoute from "./routes/GlobalTopicRoute"
 import HomeAuthRoute from "./routes/HomeAuthRoute"
-import ProfileEditRoute from "./routes/ProfileEditRoute"
 import ProfileRoute from "./routes/ProfileRoute"
 import TestRoute from "./routes/TestRoute"
 import { LaAccount } from "./schema"
+import SettingsProfile from "./routes/SettingsProfile"
 
 const router = createBrowserRouter([
 	{
@@ -17,10 +17,11 @@ const router = createBrowserRouter([
 		element: <HomeAuthRoute />,
 	},
 	{
-		path: "/edit-profile",
-		element: <ProfileEditRoute />,
+		path: "/settings/profile",
+		element: <SettingsProfile />,
 	},
 	{
+		// TODO: make @nikiv work
 		path: "/:username",
 		element: <ProfileRoute />,
 	},

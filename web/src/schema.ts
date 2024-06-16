@@ -21,6 +21,7 @@ export class Section extends CoMap {
 }
 export class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
 
+// TODO: not used until jazz supports rich text
 export class Page extends CoMap {
 	title = co.string
 	// TODO: make rich text
@@ -49,6 +50,10 @@ export class UserRoot extends CoMap {
 	personalLinks = co.ref(ListOfPersonalLinks)
 	pages = co.ref(ListOfPages)
 	todos = co.ref(ListOfPersonalTodoItems)
+	name = co.string
+	username = co.string
+	website = co.string
+	bio = co.string
 }
 
 export class LaAccount extends Account {
@@ -57,7 +62,9 @@ export class LaAccount extends Account {
 
 	async migrate(
 		this: LaAccount,
-		creationProps?: { name: string } | undefined,
+		creationProps?:
+			| { name: string; username: string; website: string; bio: string }
+			| undefined,
 	): Promise<void> {
 		if (!this._refs.root && creationProps) {
 			const profileGroup = Group.create({ owner: this })
@@ -75,6 +82,10 @@ export class LaAccount extends Account {
 					personalLinks: ListOfPersonalLinks.create([], { owner: this }),
 					pages: ListOfPages.create([], { owner: this }),
 					todos: ListOfPersonalTodoItems.create([], { owner: this }),
+					name: creationProps.name,
+					username: creationProps.username,
+					website: creationProps.website,
+					bio: creationProps.bio,
 				},
 				{ owner: this },
 			)

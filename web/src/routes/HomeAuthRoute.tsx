@@ -49,7 +49,7 @@ export const HomeAuthRouteState = proxy({
 export default function HomeAuthRoute() {
 	const local = useProxy(HomeAuthRouteState)
 	const global = useAccount({
-		root: { pages: [{}], personalLinks: [{ globalLink: {} }], todos: [{}] },
+		root: { personalLinks: [{ globalLink: {} }], todos: [{}] },
 	}).me?.root
 	if (!global) return <></>
 
