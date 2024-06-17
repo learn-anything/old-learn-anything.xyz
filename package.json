@@ -3,6 +3,7 @@
 	"scripts": {
 		"dev": "bun run web",
 		"web": "cd web && bun dev",
+		"setup": "bun cmd.ts setup",
 		"seed": "bun --watch cli/seed.ts",
 		"cli": "bun --watch cli/run.ts",
 		"state": "bun --watch cmd.ts jazz-state",

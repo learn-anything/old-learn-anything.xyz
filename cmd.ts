@@ -25,8 +25,7 @@ async function main() {
 // TODO: make `bun setup` setup everything (jazz, seed, auth etc.)
 // so readme is just `bun i`, `bun setup`, `bun dev` (and open localhost and start developing)
 async function setup() {
-	// TODO: make robust
-	await $`bun seed home`
+	await $`git clone https://github.com/learn-anything/seed cli/seed`
 }
 
 // gets state for Jazz user

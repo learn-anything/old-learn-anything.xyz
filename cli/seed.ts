@@ -11,8 +11,11 @@ async function seed() {
 			case undefined:
 				console.log("No command provided")
 				break
-			case "home":
-				await home()
+			case "authInbox":
+				await authInbox()
+				break
+			case "publicGlobalTopics":
+				await publicGlobalTopics()
 				break
 			default:
 				console.log("Unknown command")
@@ -24,8 +27,8 @@ async function seed() {
 	}
 }
 
-// seeds / (for auth and public)
-async function home() {
+// seeds / route (inbox of personal links, todos)
+async function authInbox() {
 	const { worker } = await startWorker({
 		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
 		accountSecret:
@@ -89,6 +92,15 @@ async function home() {
 			nikiv: credentials,
 		})}'`,
 	)
+}
+
+// seeds global topics
+async function publicGlobalTopics() {
+	const { worker } = await startWorker({
+		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
+		accountSecret:
+			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
+	})
 }
 
 await seed()
