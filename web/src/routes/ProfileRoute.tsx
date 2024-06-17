@@ -1,4 +1,4 @@
-import Profile from "../components/Profile"
+import EditProfile from "../components/EditProfile"
 import Sidebar from "../components/Sidebar"
 import { useParams } from "react-router-dom"
 
@@ -17,7 +17,7 @@ const ProfileRoute = () => {
 						<Sidebar />
 					</div>
 					<div className="flex-1 flex flex-col border border-neutral-800 rounded-3xl">
-						<Profile username={username} />
+						<EditProfile username={username} />
 					</div>
 				</div>
 			</div>
