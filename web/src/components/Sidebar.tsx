@@ -46,7 +46,7 @@ export default function Sidebar(props: {
 					>
 						Inbox
 					</div>
-					{currentPath !== "/globaltopic" && (
+					{/* {currentPath !== "/globaltopic" && (
 						<div
 							className="cursor-pointer px-3 text-white/60 p-[6px] rounded-[7px] transition-all"
 							onClick={() => {
@@ -55,7 +55,7 @@ export default function Sidebar(props: {
 						>
 							Links
 						</div>
-					)}
+					)} */}
 
 					{/* <div className="flex-between text-white/40">
 						<h2 className="text-white/20 text-[14px] px-3 p-2">Pages</h2>

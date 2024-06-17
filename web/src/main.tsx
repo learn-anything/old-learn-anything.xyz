@@ -17,26 +17,26 @@ const router = createBrowserRouter([
 		element: <HomeAuthRoute />,
 	},
 	{
-		path: "/settings/profile",
-		element: <SettingsProfile />,
-	},
-	{
-		// TODO: make @nikiv work
-		path: "/:username",
+		path: "/@:username",
 		element: <ProfileRoute />,
 	},
 	{
-		path: "*",
-		element: <HomeAuthRoute />,
-	},
-	{
-		path: "/globaltopic",
+		path: "/:topic",
 		element: <GlobalTopicRoute />,
 	},
+	{
+		path: "/settings/profile",
+		element: <SettingsProfile />,
+	},
+	// {
+	// 	path: "*",
+	// 	element: <HomeAuthRoute />,
+	// },
 	// {
 	// 	path: "/@:username/:page-name",
 	// 	element: <PersonalPageRoute />,
 	// },
+	// TODO: remove from prod (only available locally)
 	{
 		path: "/test",
 		element: <TestRoute />,
