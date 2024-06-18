@@ -1,28 +1,23 @@
+// TODO: render HomePublic if not auth'd
 import { createJazzReactContext, DemoAuth } from "jazz-react"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css"
-import GlobalTopicRoute from "./routes/GlobalTopicRoute"
+import GlobalTopicOrProfileRoute from "./routes/GlobalTopicOrProfileRoute"
 import HomeAuthRoute from "./routes/HomeAuthRoute"
-import ProfileRoute from "./routes/ProfileRoute"
+import SettingsProfile from "./routes/SettingsProfile"
 import TestRoute from "./routes/TestRoute"
 import { LaAccount } from "./schema"
-import SettingsProfile from "./routes/SettingsProfile"
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		// TODO: render HomePublic if not auth'd
 		element: <HomeAuthRoute />,
 	},
 	{
-		path: "/@:username",
-		element: <ProfileRoute />,
-	},
-	{
-		path: "/:topic",
-		element: <GlobalTopicRoute />,
+		path: "/:topicOrUsername",
+		element: <GlobalTopicOrProfileRoute />,
 	},
 	{
 		path: "/settings/profile",

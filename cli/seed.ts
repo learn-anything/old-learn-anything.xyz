@@ -96,11 +96,21 @@ async function authInbox() {
 
 // seeds global topics
 async function publicGlobalTopics() {
-	const { worker } = await startWorker({
-		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
-		accountSecret:
-			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
-	})
+	// const { worker } = await startWorker({
+	// 	accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
+	// 	accountSecret:
+	// 		"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
+	// })
+
+	const currentFilePath = import.meta.path
+	const connectionsFilePath = `${currentFilePath.replace(
+		"seed.ts",
+		"/seed/connections.json",
+	)}`
+	const file = Bun.file(connectionsFilePath)
+	const fileContent = await file.text()
+	const obj = JSON.parse(fileContent)
+	let topicsWithConnections = JSON.stringify(obj, null, 2)
 }
 
 await seed()
