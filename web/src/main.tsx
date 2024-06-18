@@ -24,12 +24,12 @@ const router = createBrowserRouter([
 		element: <SettingsProfile />,
 	},
 	// {
-	// 	path: "*",
-	// 	element: <HomeAuthRoute />,
+	//  path: "*",
+	//  element: <HomeAuthRoute />,
 	// },
 	// {
-	// 	path: "/@:username/:page-name",
-	// 	element: <PersonalPageRoute />,
+	//  path: "/@:username/:page-name",
+	//  element: <PersonalPageRoute />,
 	// },
 	// TODO: remove from prod (only available locally)
 	{
