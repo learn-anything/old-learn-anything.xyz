@@ -9,6 +9,8 @@ import HomeAuthRoute from "./routes/HomeAuthRoute"
 import SettingsProfile from "./routes/SettingsProfile"
 import TestRoute from "./routes/TestRoute"
 import { LaAccount } from "./schema"
+// import UserErrorRoute from "./routes/UserErrorRoute"
+import path from "path"
 
 const router = createBrowserRouter([
 	{
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
 		path: "/settings/profile",
 		element: <SettingsProfile />,
 	},
+	{
+		path: "/test",
+		element: <TestRoute />,
+	},
+	// {
+	// 	path: "/user-error",
+	// 	element: <UserErrorRoute />,
+	// },
 	// {
 	//  path: "*",
 	//  element: <HomeAuthRoute />,
@@ -32,10 +42,6 @@ const router = createBrowserRouter([
 	//  element: <PersonalPageRoute />,
 	// },
 	// TODO: remove from prod (only available locally)
-	{
-		path: "/test",
-		element: <TestRoute />,
-	},
 ])
 
 const Jazz = createJazzReactContext({
