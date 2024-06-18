@@ -7,7 +7,7 @@ export default function GlobalTopicTopbar(props: {}) {
 
 	return (
 		<div className="flex flex-row justify-between px-5 pt-5 mb-5">
-			<h1 className="text-white text-xl font-bold">JavaScript</h1>
+			<h1 className="text-white text-xl font-bold">topicOrUsername</h1>
 			<div className="flex flex-row items-center space-x-5">
 				<div className="flex flex-row items-center bg-[#181818] rounded-md">
 					<button
