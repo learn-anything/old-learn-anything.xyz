@@ -5,6 +5,7 @@ import { IoSearch } from "react-icons/io5"
 import { icons } from "./Icons"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import { on } from "events"
 
 export default function Sidebar(props: {
 	// personalPages: {
@@ -33,7 +34,11 @@ export default function Sidebar(props: {
 						<icons.LearnAnythinglogo />
 					</div>
 					<button
-						onClick={() => navigate("/search")}
+						onClick={
+							currentPath !== "/search"
+								? () => navigate("/search")
+								: () => navigate("/")
+						}
 						className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]"
 					>
 						{currentPath !== "/search" ? (
