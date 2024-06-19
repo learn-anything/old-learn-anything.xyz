@@ -33,8 +33,9 @@ const ProfileStats: React.FC<ProfileStatsProps> = ({ number, label }) => {
 
 const ProfilePages: React.FC<ProfilePagesProps> = ({ topic }) => {
 	return (
-		<div className="rounded-lg text-white items-center p-3 bg-[#121212] flex flex-row justify-between">
+		<div className="rounded-lg text-white items-center p-3 cursor-pointer bg-[#121212] flex flex-row justify-between">
 			<p>{topic}</p>
+
 			<icons.VectorArrowRight />
 		</div>
 	)
@@ -49,7 +50,7 @@ const ProfileLinks: React.FC<ProfileLinksProps> = ({
 		<div className="rounded-lg text-white items-center p-3 bg-[#121212] flex flex-row justify-between">
 			<div className="flex flex-row space-x-3 items-center">
 				<p className="text-white/40 text-base">{linklabel}</p>
-				<div className="flex flex-row items-center gap-1">
+				<div className="flex flex-row items-center gap-1 cursor-pointer">
 					<icons.Link />
 					<p className="text-white/10 text-sm">{link}</p>
 				</div>
@@ -120,7 +121,7 @@ const ProfileRoute = () => {
 										<p className="pl-1">usernamelink</p>
 									</a>
 								</div>
-								<button className="ml-auto px-3 h-[34px] bg-[#222222] text-white/70 rounded-md shadow-inner shadow-outer">
+								<button className="ml-auto px-3 h-[34px] bg-[#222222] text-white/70 hover:opacity-60 rounded-md shadow-inner shadow-outer">
 									Follow
 								</button>
 							</div>

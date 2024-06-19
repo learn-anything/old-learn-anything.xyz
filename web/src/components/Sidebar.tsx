@@ -104,9 +104,11 @@ export default function Sidebar(props: {
 					setExpandTimer(false)
 				}}
 			>
-				<div className="p-4 pb-6 flex flex-row space-x-2 items-center">
+				<div className="p-4 pb-6wl flex flex-row space-x-2 items-center">
 					<div className="w-5 h-5 rounded-sm bg-neutral-600"></div>
-					<p className="text-base text-white/70 cursor-pointer">Profile</p>
+					<p className="text-base text-white/70 hover:text-white/40 cursor-pointer">
+						Profile
+					</p>
 				</div>
 				<AnimatePresence>
 					{expanded ? (
@@ -114,7 +116,7 @@ export default function Sidebar(props: {
 							exit={{ opacity: 0, scale: 0.8 }}
 							animate={{ scale: [0.8, 1.04, 1], opacity: [0, 1] }}
 							transition={{ duration: 0.22, easing: "ease-out" }}
-							className="absolute bottom-12 w-[98%] min-w-fit left-[6px] bg-hoverDark rounded-[7px]"
+							className="absolute bottom-[3em] w-[98%] min-w-fit left-[6px] bg-hoverDark rounded-[7px]"
 							style={{
 								border: "1px solid #1E1E1E",
 								background: "rgba(55, 55, 55, 0.40)",
