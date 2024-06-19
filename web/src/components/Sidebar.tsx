@@ -36,7 +36,11 @@ export default function Sidebar(props: {
 						onClick={() => navigate("/search")}
 						className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]"
 					>
-						<IoSearch className="w-6 h-6 ml-[4px] mr-auto" />
+						{currentPath !== "/search" ? (
+							<IoSearch className="w-6 h-6 ml-[4px] mr-auto" />
+						) : (
+							<p> ← Back</p>
+						)}
 					</button>
 				</div>
 				<div className="col-gap-[8px] pl-2">
