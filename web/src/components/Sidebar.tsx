@@ -29,7 +29,10 @@ export default function Sidebar(props: {
 		<div className=" flex flex-col justify-between h-screen min-w-[200px] bg-dark text-textGray ">
 			<div>
 				<div className="flex-between m-[20px] mr-[2px] flex flex-row justify-between items-center">
-					<icons.LearnAnythinglogo />
+					<div className="cursor-pointer" onClick={() => navigate("/")}>
+						<icons.LearnAnythinglogo />
+					</div>
+
 					<div className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]">
 						<div className="flex items-center w-full">
 							<IoSearch className="w-9 h-9 mr-2" />
