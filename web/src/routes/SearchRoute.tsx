@@ -32,7 +32,9 @@ const ProfileLinks: React.FC<ProfileLinksProps> = ({
 				<p className="text-white/90 text-base">{linklabel}</p>
 				<div className="flex flex-row items-center gap-1 cursor-pointer">
 					<icons.Link />
-					<p className="text-white/10 text-sm">{link}</p>
+					<p className="text-white/10 hover:text-white/30 text-sm transition-colors duration-300">
+						{link}
+					</p>
 				</div>
 			</div>
 			<div className="rounded-lg p-2 bg-[#1a1a1a] text-white/50">{topic}</div>
@@ -51,6 +53,8 @@ export default function SearchRoute() {
 					<div className="mt-5 mb-2 w-full flex flex-row items-center relative">
 						<IoSearch className="absolute left-2 text-white/30" size={20} />
 						<input
+							type="text"
+							autoFocus
 							className="bg-[#16181d] placeholder:font-light placeholder:text-white/30 text-white/70 tracking-wider font-light outline-none rounded-[10px] w-full pl-10 pr-10 py-3"
 							placeholder="Search..."
 						/>
