@@ -6,6 +6,15 @@ interface ProfileTopicsProps {
 	topic: string
 }
 
+const ProfileTopics: React.FC<ProfileTopicsProps> = ({ topic }) => {
+	return (
+		<div className="rounded-lg text-white items-center p-3 cursor-pointer bg-[#121212] flex flex-row justify-between">
+			<p>{topic}</p>
+			<icons.VectorArrowRight />
+		</div>
+	)
+}
+
 interface ProfileLinksProps {
 	linklabel: string
 	link: string
@@ -39,7 +48,7 @@ export default function SearchRoute() {
 			</div>
 			<div className="w-full mt-2 h-full border border-white/10 rounded-[20px] mr-2 flex justify-center">
 				<div className="w-[45%]">
-					<div className="mt-5 w-full flex flex-row items-center relative">
+					<div className="mt-5 mb-2 w-full flex flex-row items-center relative">
 						<IoSearch className="absolute left-2 text-white/30" size={20} />
 						<input
 							className="bg-[#16181d] placeholder:font-light placeholder:text-white/30 text-white/70 tracking-wider font-light outline-none rounded-[10px] w-full pl-10 pr-10 py-3"
@@ -50,8 +59,15 @@ export default function SearchRoute() {
 							size={20}
 						/>
 					</div>
-					<div className="justify-center mt-20 mx-auto  space-y-1">
-						<p className="text-white/50 pl-2 pb-2 text-base font-light">
+					<div className="justify-center my-5 mx-auto space-y-1">
+						<p className="text-white/50 pl-2 pb-3 text-base font-light">
+							Topics <span className="text-white/70">1</span>
+						</p>
+						<ProfileTopics topic="Figma" />
+					</div>
+
+					<div className="justify-center my-5 mx-auto  space-y-1">
+						<p className="text-white/50 pl-2 pb-3 text-base font-light">
 							Links <span className="text-white/70">3</span>
 						</p>
 						<ProfileLinks
