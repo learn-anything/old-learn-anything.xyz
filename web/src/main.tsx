@@ -9,6 +9,7 @@ import HomeAuthRoute from "./routes/HomeAuthRoute"
 import SettingsProfile from "./routes/SettingsProfile"
 import TestRoute from "./routes/TestRoute"
 import { LaAccount } from "./schema"
+import SearchRoute from "./routes/SearchRoute"
 // import UserErrorRoute from "./routes/UserErrorRoute"
 import path from "path"
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <HomeAuthRoute />,
+	},
+	{
+		path: "/search",
+		element: <SearchRoute />,
 	},
 	{
 		path: "/:topicOrUsername",
