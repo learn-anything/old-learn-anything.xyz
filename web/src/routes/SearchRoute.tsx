@@ -37,13 +37,12 @@ export default function SearchRoute() {
 			<div className="w-1/7 mr-2">
 				<Sidebar />
 			</div>
-
 			<div className="w-full mt-2 h-full border border-white/10 rounded-[20px] mr-2 flex justify-center">
 				<div className="w-[45%]">
 					<div className="mt-5 w-full flex flex-row items-center relative">
 						<IoSearch className="absolute left-2 text-white/30" size={20} />
 						<input
-							className="bg-[#16181d] placeholder:font-light placeholder:text-white/30 text-white tracking-wide font-light outline-none rounded-[10px] w-full pl-10 pr-10 py-3"
+							className="bg-[#16181d] placeholder:font-light placeholder:text-white/30 text-white/70 tracking-wider font-light outline-none rounded-[10px] w-full pl-10 pr-10 py-3"
 							placeholder="Search..."
 						/>
 						<IoCloseOutline

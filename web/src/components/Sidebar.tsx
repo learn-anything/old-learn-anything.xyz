@@ -39,7 +39,7 @@ export default function Sidebar(props: {
 								? () => navigate("/search")
 								: () => navigate("/")
 						}
-						className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 bg-[#161616]"
+						className="w-[50%] h-[50px] flex items-center justify-center px-2 rounded-xl text-white/20 hover:text-white/50 transition-colors duration-300 bg-[#161616]"
 					>
 						{currentPath !== "/search" ? (
 							<IoSearch className="w-6 h-6 ml-[4px] mr-auto" />
