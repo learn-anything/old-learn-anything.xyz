@@ -749,6 +749,21 @@ export const icons = {
 			></path>
 		</svg>
 	),
+	VectorArrowRight: (props) => (
+		<svg
+			width="7"
+			height="13"
+			viewBox="0 0 7 13"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				opacity="0.5"
+				d="M0.227806 1.38702C-0.0759354 1.06972 -0.0759354 0.555277 0.227806 0.237976C0.531547 -0.0793252 1.02401 -0.0793252 1.32775 0.237976L6.77219 5.92548C7.07594 6.24278 7.07594 6.75722 6.77219 7.07452L1.32775 12.762C1.02401 13.0793 0.531547 13.0793 0.227806 12.762C-0.0759354 12.4447 -0.0759354 11.9303 0.227806 11.613L5.12228 6.5L0.227806 1.38702Z"
+				fill="white"
+			/>
+		</svg>
+	),
 } as const satisfies Record<string, (props: BaseIconProps) => React.JSX.Element>
 
 export interface IconProps extends BaseIconProps {

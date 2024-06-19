@@ -12,6 +12,16 @@ interface ProfileStatsProps {
 	label: string
 }
 
+interface ProfilePagesProps {
+	topic: string
+}
+
+interface ProfileLinksProps {
+	linklabel: string
+	link: string
+	topic: string
+}
+
 const ProfileStats: React.FC<ProfileStatsProps> = ({ number, label }) => {
 	return (
 		<div className="text-center font-semibold">
@@ -21,11 +31,38 @@ const ProfileStats: React.FC<ProfileStatsProps> = ({ number, label }) => {
 	)
 }
 
+const ProfilePages: React.FC<ProfilePagesProps> = ({ topic }) => {
+	return (
+		<div className="rounded-lg text-white items-center p-3 bg-[#121212] flex flex-row justify-between">
+			<p>{topic}</p>
+			<icons.VectorArrowRight />
+		</div>
+	)
+}
+
+const ProfileLinks: React.FC<ProfileLinksProps> = ({
+	linklabel,
+	link,
+	topic,
+}) => {
+	return (
+		<div className="rounded-lg text-white items-center p-3 bg-[#121212] flex flex-row justify-between">
+			<div className="flex flex-row space-x-3 items-center">
+				<p className="text-white/40 text-base">{linklabel}</p>
+				<div className="flex flex-row items-center gap-1">
+					<icons.Link />
+					<p className="text-white/10 text-sm">{link}</p>
+				</div>
+			</div>
+			<div className="rounded-lg p-2 bg-[#1a1a1a] text-white/50">{topic}</div>
+		</div>
+	)
+}
+
 const ProfileRoute = () => {
 	const params = useParams()
 
 	if (!params.topicOrUsername) {
-		// TODO: render user not found page ala X/IG
 		return (
 			<div className="flex flex-col h-screen py-3">
 				<div className="flex flex-1">
@@ -94,6 +131,35 @@ const ProfileRoute = () => {
 								<ProfileStats number={124} label="To Learn" />
 								<ProfileStats number={12} label="Learned" />
 							</div>
+						</div>
+
+						<div className="justify-center mt-10 mx-auto w-[50%] space-y-1">
+							<p className="text-white/50 pl-2 pb-3 text-base font-light">
+								Public Pages
+							</p>
+							<ProfilePages topic="Figma" />
+							<ProfilePages topic="React" />
+							<ProfilePages topic="Redux" />
+						</div>
+						<div className="justify-center mt-10 mx-auto w-[50%] space-y-1">
+							<p className="text-white/50 pl-2 pb-3 text-base font-light">
+								Public Links
+							</p>
+							<ProfileLinks
+								linklabel="Figma"
+								link="https://figma.com"
+								topic="Figma"
+							/>
+							<ProfileLinks
+								linklabel="Figma"
+								link="https://figma.com"
+								topic="Figma"
+							/>
+							<ProfileLinks
+								linklabel="Figma"
+								link="https://figma.com"
+								topic="Figma"
+							/>
 						</div>
 					</div>
 				</div>
