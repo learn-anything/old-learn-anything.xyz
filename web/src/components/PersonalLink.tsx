@@ -1,119 +1,63 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
+import { proxy } from "valtio"
 import Icon from "./Icons"
-import Topbar from "./Topbar"
-import NewTodoOrLink from "./NewTodoOrLink"
-import { HomeAuthRouteState } from "../routes/HomeAuthRoute"
 
-interface Props {
-	showView: string
-	// TODO: get from jazz
-	links: any[]
-	showNewTodoOrLink: boolean
-}
-export default function PersonalLink(props: Props) {
-	const [expandedLink, setExpandedLink] = useState<string | null>(null)
-	const [links, setLinks] = useState<any[]>(props.links)
-
-	const addLink = (link: any) => {
-		setLinks([...links, link])
-		HomeAuthRouteState.showNewTodoOrLink = false
-		HomeAuthRouteState.rotateIcon = false
-	}
-
-	return (
-		<div className="w-full h-full border border-white/10 rounded-[20px]">
-			<Topbar
-				showView={props.showView as "All" | "Links" | "Todos"}
-				setShowView={() => {}}
-			/>
-			<div className="px-5">
-				{props.showNewTodoOrLink && (
-					<div>
-						<NewTodoOrLink addLink={addLink} />
-					</div>
-				)}
-				{links.map((link, index) => (
-					<ProfileLink
-						key={index}
-						link={link}
-						expandedLink={expandedLink}
-						setExpandedLink={setExpandedLink}
-						index={index}
-						showNewTodoOrLink={props.showNewTodoOrLink}
-					/>
-				))}
-			</div>
-		</div>
-	)
-}
-
-function ProfileLink(props: {
-	// link: Links
-	link: any
+export function PersonalLink(props: {
+	link: { title: string; description: string; date: string }
 	expandedLink: string | null
 	setExpandedLink: (title: string | null) => void
 	showNewTodoOrLink: boolean
 	index: number
 }) {
-	const [hovered] = useState(false)
-	const [title, setTitle] = useState(props.link.title)
-	const [description, setDescription] = useState(props.link.description)
-
-	const handleAttachmentClick = (event: React.MouseEvent<HTMLDivElement>) => {
-		event.stopPropagation()
-	}
-
-	const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value)
-	}
-
-	const changeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDescription(event.target.value)
-	}
-
-	const isExpanded = props.expandedLink === props.link.title
-
+	const local = proxy({
+		title: props.link.title,
+		description: props.link.description,
+		isExpanded: props.expandedLink === props.link.title,
+	})
 	return (
 		<div>
 			<motion.div
 				id="ProfileLink"
 				onClick={() => {
-					props.setExpandedLink(isExpanded ? null : props.link.title)
+					props.setExpandedLink(local.isExpanded ? null : props.link.title)
 				}}
-				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all ${
-					isExpanded ? "h-full transition-all !bg-neutral-900" : ""
+				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all cursor-pointer ${
+					local.isExpanded ? "h-full transition-all !bg-neutral-900" : ""
 				}`}
 			>
 				<div className="flex flex-row items-center justify-between">
 					<div
-						className={`flex flex-row p-2 items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
+						className={`flex flex-row p-2 items-center w-full justify-between ${!local.isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
 					>
 						<div className="flex items-center">
-							{isExpanded ? (
+							{local.isExpanded ? (
 								<input
 									onClick={(e) => e.stopPropagation()}
-									value={title}
-									onChange={changeTitle}
+									value={local.title}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+										local.title = event.target.value
+									}}
 									className="bg-inherit text-white/50 placeholder:text-neutral-600 w-full p-2 outline-none focus:outline-none focus:ring-0 border-none text-left"
 								/>
 							) : (
 								<p>{props.link.title}</p>
 							)}
 
-							{isExpanded && (
+							{local.isExpanded && (
 								<p className="text-white/10 ml-2">{props.link.date}</p>
 							)}
 						</div>
-						{isExpanded && (
+						{local.isExpanded && (
 							<Icon name="Link" height="20" width="30" border="gray" />
 						)}
 					</div>
 				</div>
 
-				{isExpanded ? (
+				{local.isExpanded ? (
 					<motion.div
-						onClick={handleAttachmentClick}
+						onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+							event.stopPropagation()
+						}}
 						className="w-full h-full flex flex-col justify-between"
 					>
 						<div className="flex-col flex justify-between text-[14px]">
@@ -121,8 +65,10 @@ function ProfileLink(props: {
 								onClick={(e) => e.stopPropagation()}
 								className="bg-inherit text-white/50 placeholder:text-neutral-600 w-[90%] p-2 outline-none focus:outline-none focus:ring-0 border-none text-left"
 								style={{ textAlign: "left", whiteSpace: "pre-wrap" }}
-								value={description}
-								onChange={changeDescription}
+								value={local.description}
+								onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+									local.description = event.target.value
+								}}
 								placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, officia."
 							></input>
 						</div>
@@ -136,7 +82,7 @@ function ProfileLink(props: {
 									className="text-[14px] placeholder:text-neutral-600 text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 								/>
 							</div>
-							{hovered || isExpanded ? (
+							{local.isExpanded ? (
 								<div className="flex flex-row justify-between items-center gap-2">
 									<motion.div
 										animate={{
@@ -158,7 +104,7 @@ function ProfileLink(props: {
 											<Icon name="Heart" height="24" width="24" border="gray" />
 										</button>
 									</motion.div>
-									<Status />
+									<PeronalLinkStatus />
 								</div>
 							) : null}
 						</div>
@@ -169,10 +115,12 @@ function ProfileLink(props: {
 	)
 }
 
-function Status() {
-	const [expanded, setExpanded] = useState(false)
-	const [status, setStatus] = useState("Learning")
-	const [expandTimer, setExpandTimer] = useState(false)
+function PeronalLinkStatus() {
+	const local = proxy({
+		expanded: false,
+		status: "Learning",
+		expandTimer: false,
+	})
 	return (
 		<motion.div
 			animate={{
@@ -182,19 +130,19 @@ function Status() {
 			transition={{ duration: 0.5 }}
 			className="relative"
 			onMouseLeave={() => {
-				setExpandTimer(true)
+				local.expandTimer = true
 				setTimeout(() => {
-					if (expandTimer) {
-						setExpanded(false)
+					if (local.expandTimer) {
+						local.expanded = false
 					}
 				}, 500)
 			}}
 			onMouseEnter={() => {
-				setExpandTimer(false)
+				local.expandTimer = false
 			}}
 		>
 			<AnimatePresence>
-				{expanded ? (
+				{local.expanded ? (
 					<motion.div
 						exit={{ opacity: 0, scale: 0.8 }}
 						animate={{ scale: [0.8, 1.1, 1], opacity: [0, 1] }}
