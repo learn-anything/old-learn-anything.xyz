@@ -1,6 +1,6 @@
 import React from "react"
 
-export interface BaseIconProps {
+interface BaseIconProps {
 	width?: string
 	height?: string
 	fill?: string
@@ -766,7 +766,7 @@ export const icons = {
 	),
 } as const satisfies Record<string, (props: BaseIconProps) => React.JSX.Element>
 
-export interface IconProps extends BaseIconProps {
+interface IconProps extends BaseIconProps {
 	name: keyof typeof icons
 }
 

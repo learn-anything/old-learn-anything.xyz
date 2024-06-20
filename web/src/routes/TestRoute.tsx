@@ -34,10 +34,10 @@ export default function TestRoute() {
 	)
 }
 
-export function TodoItemComponent({ item }: { item: TodoItem }) {
+function TodoItemComponent({ item }: { item: TodoItem }) {
 	return ""
 }
 
-export function PersonalLinkComponent({ item }: { item: PersonalLink }) {
+function PersonalLinkComponent({ item }: { item: PersonalLink }) {
 	return item.globalLink?.url
 }

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 
-export function classNames(...classes: (string | boolean | undefined)[]) {
+function classNames(...classes: (string | boolean | undefined)[]) {
 	return classes.filter(Boolean).join(" ")
 }
 

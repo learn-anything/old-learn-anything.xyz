@@ -6,23 +6,23 @@ export class PersonalLink extends CoMap {
 	globalLink = co.ref(GlobalLink)
 }
 
-export class GlobalLink extends CoMap {
+class GlobalLink extends CoMap {
 	url = co.string // unique
 }
 
-export class GlobalTopic extends CoMap {
+class GlobalTopic extends CoMap {
 	name = co.string
 	title = co.string
 	sections = co.ref(ListOfSections)
 }
-export class Section extends CoMap {
+class Section extends CoMap {
 	title = co.string
 	links = co.ref(ListOfGlobalLinks)
 }
-export class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
+class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
 
 // TODO: not used until jazz supports rich text
-export class Page extends CoMap {
+class Page extends CoMap {
 	title = co.string
 	// TODO: make rich text
 	content = co.string
@@ -34,16 +34,16 @@ export class TodoItem extends CoMap {
 	done = co.boolean
 }
 
-export class ListOfGlobalLinks extends CoList.Of(co.ref(GlobalLink)) {}
-export class ListOfPersonalLinks extends CoList.Of(co.ref(PersonalLink)) {}
-export class ListOfPersonalTodoItems extends CoList.Of(co.ref(TodoItem)) {}
-export class ListOfPages extends CoList.Of(co.ref(Page)) {}
-export class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
-export class UserProfile extends CoMap {
+class ListOfGlobalLinks extends CoList.Of(co.ref(GlobalLink)) {}
+class ListOfPersonalLinks extends CoList.Of(co.ref(PersonalLink)) {}
+class ListOfPersonalTodoItems extends CoList.Of(co.ref(TodoItem)) {}
+class ListOfPages extends CoList.Of(co.ref(Page)) {}
+class ListOfTopics extends CoList.Of(co.ref(GlobalTopic)) {}
+class UserProfile extends CoMap {
 	name = co.string
 	// TODO: avatar
 }
-export class UserRoot extends CoMap {
+class UserRoot extends CoMap {
 	topicsWantToLearn = co.ref(ListOfTopics)
 	topicsLearning = co.ref(ListOfTopics)
 	topicsLearned = co.ref(ListOfTopics)

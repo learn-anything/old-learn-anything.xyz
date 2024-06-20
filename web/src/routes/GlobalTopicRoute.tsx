@@ -6,7 +6,7 @@ import GlobalTopicTopbar from "../components/GlobalTopicTopbar"
 import { useAccount } from "../main"
 import Icon from "../components/Icons"
 
-export const Props = proxy({
+const Props = proxy({
 	showView: "All",
 	inputValue: "Testing",
 	rotateIcon: false,
