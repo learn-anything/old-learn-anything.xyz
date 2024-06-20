@@ -25,7 +25,7 @@ export default function PersonalLink(props: Props) {
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
 			<Topbar
-				showView={props.showView as "All" | "Links" | "Todos" | "Topics"}
+				showView={props.showView as "All" | "Links" | "Todos"}
 				setShowView={() => {}}
 			/>
 			<div className="px-5">
@@ -72,55 +72,38 @@ function ProfileLink(props: {
 					props.setExpandedLink(isExpanded ? null : props.link.title)
 				}}
 				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all ${
-					isExpanded ? "h-full transition-all !bg-[#171A21]" : ""
+					isExpanded ? "h-full transition-all !bg-neutral-900" : ""
 				}`}
 			>
 				<div className="flex flex-row items-center justify-between">
 					<div
-						className={`flex flex-row items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
+						className={`flex flex-row p-2 items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
 					>
-						<p>{props.link.title}</p>
-						{!isExpanded && (
+						<div className="flex items-center">
+							<p>{props.link.title}</p>
+							{isExpanded && (
+								<p className="text-white/10 ml-2">{props.link.date}</p>
+							)}
+						</div>
+						{isExpanded && (
 							<Icon name="Link" height="20" width="30" border="gray" />
 						)}
 					</div>
-					{hovered || isExpanded ? (
-						<div className="flex flex-row justify-between items-center gap-2">
-							<motion.div
-								animate={{
-									transform: ["translateX(5px)", "translateX(0)"],
-									opacity: [0, 0.6],
-								}}
-								transition={{ duration: 0.3 }}
-								className="opacity-60 items-center flex flex-row gap-2"
-							>
-								<button className="cursor:pointer">
-									<Icon name="Options" height="20" width="30" border="gray" />
-								</button>
-								<button className="cursor:pointer">
-									<Icon name="Heart" height="24" width="24" border="gray" />
-								</button>
-							</motion.div>
-							<Status />
-						</div>
-					) : null}
 				</div>
 
 				{isExpanded ? (
 					<motion.div
 						onClick={handleAttachmentClick}
-						className="w-full h-[300px] flex flex-col justify-between"
+						className="w-full h-full flex flex-col justify-between"
 					>
-						<div className="pl-7 flex-col flex justify-between gap-2 p-2 text-[14px]">
-							<div className="text-white/50 w-[700px]">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
-								officia. Delectus in dolor quam praesentium laborum velit iusto
-								aut saepe quibusdam, quia, nihil omnis odit dignissimos tenetur
-								incidunt placeat fuga.
-							</div>
-							<div className="text-white/10">{props.link.date}</div>
+						<div className="flex-col flex justify-between text-[14px]">
+							<input
+								className="bg-inherit text-white/50 placeholder:text-neutral-600 w-[90%] p-2 outline-none focus:outline-none focus:ring-0 border-none text-left"
+								style={{ textAlign: "left", whiteSpace: "pre-wrap" }}
+								placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, officia."
+							></input>
 						</div>
-						<div className="w-full flex flex-row justify-between items-center border-t border-[#1f222b] p-2">
+						<div className="w-full flex flex-row justify-between items-center p-2">
 							<div className="flex flex-row items-center">
 								<Icon name="Note" height="24" width="24" border="white" />
 								<input
@@ -129,17 +112,34 @@ function ProfileLink(props: {
 									onChange={() => {
 										// TODO: change
 									}}
-									className="text-[14px] text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
+									className="text-[14px] placeholder:text-neutral-600 text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 								/>
 							</div>
-							<div
-								className="w-fit"
-								onClick={() => {
-									props.setExpandedLink(null)
-								}}
-							>
-								<Button label="Done" onChange={() => {}} />
-							</div>
+							{hovered || isExpanded ? (
+								<div className="flex flex-row justify-between items-center gap-2">
+									<motion.div
+										animate={{
+											transform: ["translateX(5px)", "translateX(0)"],
+											opacity: [0, 0.6],
+										}}
+										transition={{ duration: 0.3 }}
+										className="opacity-60 items-center flex flex-row gap-2"
+									>
+										<button className="cursor:pointer">
+											<Icon
+												name="Options"
+												height="20"
+												width="30"
+												border="gray"
+											/>
+										</button>
+										<button className="cursor:pointer">
+											<Icon name="Heart" height="24" width="24" border="gray" />
+										</button>
+									</motion.div>
+									<Status />
+								</div>
+							) : null}
 						</div>
 					</motion.div>
 				) : null}
@@ -172,21 +172,6 @@ function Status() {
 				setExpandTimer(false)
 			}}
 		>
-			<button
-				onClick={() => {
-					setExpanded(!expanded)
-				}}
-				className={`items-center justify-center flex flex-row cursor-pointer text-[#D29752] h-[34px] px-[11px] rounded-[7px] flex-center ${status === "To Learn" && "text-[#d26352]"} ${status === "Learned" && "text-[#52d274]"}`}
-				style={{
-					background:
-						"linear-gradient(0deg, rgba(255, 167, 64, 0.02) 0%, rgba(255, 167, 64, 0.02) 100%), rgba(255, 255, 255, 0.02)",
-				}}
-			>
-				<span className="mr-2">
-					<Icon name="Hat" />
-				</span>
-				{status}
-			</button>
 			<AnimatePresence>
 				{expanded ? (
 					<motion.div
@@ -199,35 +184,7 @@ function Status() {
 							background: "rgba(55, 55, 55, 0.40)",
 							backdropFilter: "blur(8.5px)",
 						}}
-					>
-						<div
-							onClick={() => {
-								setStatus("Learning")
-								setExpanded(false)
-							}}
-							className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
-						>
-							Learning
-						</div>
-						<div
-							onClick={() => {
-								setStatus("To Learn")
-								setExpanded(false)
-							}}
-							className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
-						>
-							To Learn
-						</div>
-						<div
-							onClick={() => {
-								setStatus("Learned")
-								setExpanded(false)
-							}}
-							className="rounded-[7px] h-[34px] px-[11px] flex-center hover:bg-softDarkText/10 text-white/60"
-						>
-							Learned
-						</div>
-					</motion.div>
+					></motion.div>
 				) : null}
 			</AnimatePresence>
 		</motion.div>
