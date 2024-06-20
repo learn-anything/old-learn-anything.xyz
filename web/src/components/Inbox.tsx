@@ -1,8 +1,8 @@
-import Topbar from "./Topbar"
 import NewTodoOrLink from "./NewTodoOrLink"
 import { HomeAuthRouteState } from "../routes/HomeAuthRoute"
 import { PersonalLink } from "./PersonalLink"
 import { proxy } from "valtio"
+import InboxTopbar from "./InboxTopbar"
 
 export default function Inbox(props: {
 	showView: string
@@ -17,7 +17,7 @@ export default function Inbox(props: {
 
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
-			<Topbar
+			<InboxTopbar
 				showView={props.showView as "All" | "Links" | "Todos"}
 				setShowView={() => {}}
 			/>
