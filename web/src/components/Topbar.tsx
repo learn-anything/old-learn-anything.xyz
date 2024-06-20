@@ -7,9 +7,9 @@ export default function Topbar(props: {
 }) {
 	return (
 		<div className="flex flex-row justify-between px-5 pt-5 mb-5">
-			<div className="flex [&>*]:h-full bg-hoverDark rounded-md text-white/60 bg-[#191919] [&>*]:flex-center h-[34px] items-center">
+			<div className=" flex [&>*]:h-full bg-hoverDark rounded-md text-white/60 bg-[#191919] [&>*]:flex-center h-[34px] items-center">
 				<button
-					className={`px-[11px] ${props.showView === "All" ? "bg-[#222222] text-white/80 rounded-md shadow-inner shadow-outer" : ""}`}
+					className={`px-[11px] cursor-pointer ${props.showView === "All" ? "bg-[#222222] text-white/80 rounded-md shadow-inner shadow-outer" : ""}`}
 					onClick={() => {
 						// props.showView.set("All")
 					}}
@@ -42,7 +42,7 @@ export default function Topbar(props: {
 					Topics
 				</button> */}
 			</div>
-			<div className="flex flex-row items-center gap-2">
+			<div className="flex flex-row items-center gap-2 cursor-pointer">
 				<Filter />
 				<LinkOrder />
 			</div>
