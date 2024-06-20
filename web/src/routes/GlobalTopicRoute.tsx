@@ -1,19 +1,15 @@
-import { proxy } from "valtio"
 import { useProxy } from "valtio/utils"
-import { useState } from "react"
-import Sidebar from "../components/Sidebar"
 import GlobalTopicTopbar from "../components/GlobalTopicTopbar"
-import { useAccount } from "../main"
 import Icon from "../components/Icons"
-
-const Props = proxy({
-	showView: "All",
-	inputValue: "Testing",
-	rotateIcon: false,
-})
+import Sidebar from "../components/Sidebar"
+import { useAccount } from "../main"
 
 export default function GlobalTopicRoute() {
-	const local = useProxy(Props)
+	const local = useProxy({
+		showView: "All",
+		inputValue: "Testing",
+		rotateIcon: false,
+	})
 	const global = useAccount({}).me?.root
 	if (!global) return <></>
 

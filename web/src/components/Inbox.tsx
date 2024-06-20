@@ -1,8 +1,8 @@
-import { useState } from "react"
 import Topbar from "./Topbar"
 import NewTodoOrLink from "./NewTodoOrLink"
 import { HomeAuthRouteState } from "../routes/HomeAuthRoute"
 import { PersonalLink } from "./PersonalLink"
+import { proxy } from "valtio"
 
 export default function Inbox(props: {
 	showView: string
@@ -10,14 +10,10 @@ export default function Inbox(props: {
 	links: any[]
 	showNewTodoOrLink: boolean
 }) {
-	const [expandedLink, setExpandedLink] = useState<string | null>(null)
-	const [links, setLinks] = useState<any[]>(props.links)
-
-	const addLink = (link: any) => {
-		setLinks([...links, link])
-		HomeAuthRouteState.showNewTodoOrLink = false
-		HomeAuthRouteState.rotateIcon = false
-	}
+	const local = proxy({
+		expandedLink: null as string | null,
+		links: props.links,
+	})
 
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
@@ -28,15 +24,23 @@ export default function Inbox(props: {
 			<div className="px-5">
 				{props.showNewTodoOrLink && (
 					<div>
-						<NewTodoOrLink addLink={addLink} />
+						<NewTodoOrLink
+							addLink={(link) => {
+								local.links = [...local.links, link]
+								HomeAuthRouteState.showNewTodoOrLink = false
+								HomeAuthRouteState.rotateIcon = false
+							}}
+						/>
 					</div>
 				)}
-				{links.map((link, index) => (
+				{local.links.map((link, index) => (
 					<PersonalLink
 						key={index}
 						link={link}
-						expandedLink={expandedLink}
-						setExpandedLink={setExpandedLink}
+						expandedLink={local.expandedLink}
+						setExpandedLink={(title) => {
+							local.expandedLink = title
+						}}
 						index={index}
 						showNewTodoOrLink={props.showNewTodoOrLink}
 					/>

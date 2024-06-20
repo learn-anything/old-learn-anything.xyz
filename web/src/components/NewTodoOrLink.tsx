@@ -1,41 +1,41 @@
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
+import { proxy } from "valtio"
 import Icon from "./Icons"
-interface NewTodoOrLinkProps {
-	addLink: (link: any) => void
-}
-interface TextInputProps {
+
+function TextInput({
+	inputValue,
+	onChange,
+	errorMessage,
+}: {
 	inputValue: string
 	date?: number
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 	errorMessage?: string
+}) {
+	return (
+		<input
+			type="text"
+			placeholder={errorMessage || "Write a todo or paste link"}
+			value={inputValue}
+			onChange={onChange}
+			autoFocus
+			className="flex flex-row items-center w-full justify-between bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-xl p-3 pl-5 h-full ml-3"
+		/>
+	)
 }
 
-const TextInput: React.FC<TextInputProps> = ({
-	inputValue,
-	onChange,
-	errorMessage,
-}) => (
-	<input
-		type="text"
-		placeholder={errorMessage || "Write a todo or paste link"}
-		value={inputValue}
-		onChange={onChange}
-		autoFocus
-		className="flex flex-row items-center w-full justify-between bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-xl p-3 pl-5 h-full ml-3"
-	/>
-)
-
-const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
-	const [title, setTitle] = useState("")
-	const [description, setDescription] = useState("")
+function UrlInput({ inputValue }: { inputValue: string }) {
+	const local = proxy({
+		title: "",
+		description: "",
+	})
 	const inputRef = useRef<HTMLInputElement>(null)
 
-	// fix title
 	useEffect(() => {
 		if (inputRef.current) {
 			inputRef.current.style.width = `${inputRef.current.value.length + 1}ch`
 		}
-	}, [title])
+	}, [local.title])
 
 	useEffect(() => {
 		fetch(inputValue)
@@ -43,18 +43,12 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 			.then((html) => {
 				const doc = new DOMParser().parseFromString(html, "text/html")
 				const titleElement = doc.querySelectorAll("title")[0]
-				setTitle(titleElement ? titleElement.innerText : inputValue)
+				local.title = titleElement ? titleElement.innerText : inputValue
 			})
-			.catch(() => setTitle(inputValue))
+			.catch(() => {
+				local.title = inputValue
+			})
 	}, [inputValue])
-
-	const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value)
-	}
-
-	const changeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDescription(event.target.value)
-	}
 
 	return (
 		<div className="bg-[#181818] w-full rounded-lg p-2 pb-2">
@@ -64,8 +58,10 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 						type="url"
 						autoFocus
 						ref={inputRef}
-						value={title}
-						onChange={changeTitle}
+						value={local.title}
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+							local.title = event.target.value
+						}}
 						className="flex-grow text-base bg-transparent outline-none focus:ring-0 focus:outline-none text-white"
 					/>
 					<p className="text-neutral-700 text-sm font-light">2024</p>
@@ -75,8 +71,10 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 			<input
 				type="text"
 				placeholder="Add description"
-				value={description}
-				onChange={changeDescription}
+				value={local.description}
+				onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+					local.description = event.target.value
+				}}
 				className="text-base p-2 bg-transparent outline-none focus:ring-0 focus:outline-none text-white/50 placeholder:text-white/30"
 			/>
 			<div className="flex flex-row justify-between items-center">
@@ -103,34 +101,36 @@ const UrlInput: React.FC<TextInputProps> = ({ inputValue }) => {
 	)
 }
 
-const NewTodoOrLink: React.FC<NewTodoOrLinkProps> = ({ addLink }) => {
-	const [inputValue, setInputValue] = useState("")
-	const [isUrlInput, setIsUrlInput] = useState(false)
-	const [showInput, setShowInput] = useState(true)
-
-	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(event.target.value)
-		setIsUrlInput(
-			event.target.value.startsWith("http://") ||
-				event.target.value.startsWith("https://"),
-		)
-	}
-
-	const createNewTodoOrLink = (event: React.FormEvent) => {
-		event.preventDefault()
-		if (inputValue.trim()) {
-			addLink({ title: inputValue })
-			setInputValue("")
-			setShowInput(false)
-		}
-	}
+function NewTodoOrLink({ addLink }: any) {
+	const local = proxy({
+		inputValue: "",
+		isUrlInput: false,
+		showInput: true,
+	})
 
 	return (
-		<form onSubmit={createNewTodoOrLink}>
-			{isUrlInput ? (
-				<UrlInput inputValue={inputValue} onChange={inputChange} />
+		<form
+			onSubmit={(event: React.FormEvent) => {
+				event.preventDefault()
+				if (local.inputValue.trim()) {
+					addLink({ title: local.inputValue })
+					local.inputValue = ""
+					local.showInput = false
+				}
+			}}
+		>
+			{local.isUrlInput ? (
+				<UrlInput inputValue={local.inputValue} />
 			) : (
-				<TextInput inputValue={inputValue} onChange={inputChange} />
+				<TextInput
+					inputValue={local.inputValue}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						local.inputValue = event.target.value
+						local.isUrlInput =
+							event.target.value.startsWith("http://") ||
+							event.target.value.startsWith("https://")
+					}}
+				/>
 			)}
 		</form>
 	)

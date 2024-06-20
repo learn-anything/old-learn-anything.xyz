@@ -1,26 +1,16 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import { icons } from "./Icons"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { on } from "events"
+import { proxy } from "valtio"
 
-export default function Sidebar(props: {
-	// personalPages: {
-	// 	title: string
-	// 	prettyName: string
-	// 	content: string
-	// }[]
-	// topicTitle?: Observable<typeof Page>
-	// setMode: (value: string) => void
-	// mode: string
-	// currentPage: string
-	// setCurrentPage: (value: string) => void
-}) {
-	const [expanded, setExpanded] = useState(false)
-	const [expandTimer, setExpandTimer] = useState(false)
+export default function Sidebar() {
+	const local = proxy({
+		expanded: false,
+		expandTimer: false,
+	})
 	const navigate = useNavigate()
 
 	const location = useLocation()
@@ -95,18 +85,18 @@ export default function Sidebar(props: {
 			<div
 				className="relative"
 				onClick={() => {
-					setExpanded(!expanded)
+					local.expanded = !local.expanded
 				}}
 				onMouseLeave={() => {
-					setExpandTimer(true)
+					local.expandTimer = true
 					setTimeout(() => {
-						if (expandTimer) {
-							setExpanded(false)
+						if (local.expandTimer) {
+							local.expanded = false
 						}
 					}, 500)
 				}}
 				onMouseEnter={() => {
-					setExpandTimer(false)
+					local.expandTimer = false
 				}}
 			>
 				<div className="p-4 pb-6wl flex flex-row space-x-2 items-center">
@@ -116,7 +106,7 @@ export default function Sidebar(props: {
 					</p>
 				</div>
 				<AnimatePresence>
-					{expanded ? (
+					{local.expanded ? (
 						<motion.div
 							exit={{ opacity: 0, scale: 0.8 }}
 							animate={{ scale: [0.8, 1.04, 1], opacity: [0, 1] }}

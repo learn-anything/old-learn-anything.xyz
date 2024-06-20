@@ -1,37 +1,39 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
+import { proxy } from "valtio"
 import Icon from "./Icons"
 
-export function LinkOrder(props: { filterOrder?: "Custom" | "RecentlyAdded" }) {
-	const [expanded, setExpanded] = useState(false)
-	const [filterOrder, setFilterOrder] = useState("Recently Added")
-	const [expandTimer, setExpandTimer] = useState(false)
+export function LinkOrder() {
+	const local = proxy({
+		expanded: false,
+		filterOrder: "Recently Added",
+		expandTimer: false,
+	})
 	return (
 		<div
 			className="relative"
 			onMouseLeave={() => {
-				setExpandTimer(true)
+				local.expandTimer = true
 				setTimeout(() => {
-					if (expandTimer) {
-						setExpanded(false)
+					if (local.expandTimer) {
+						local.expanded = false
 					}
 				}, 500)
 			}}
 			onMouseEnter={() => {
-				setExpandTimer(false)
+				local.expandTimer = false
 			}}
 		>
 			<div
 				onClick={() => {
-					setExpanded(!expanded)
+					local.expanded = !local.expanded
 				}}
 				className="flex flex-row items-center button px-[11px] pr-[4px] text-white/60 h-[34px] flex-center gap-1 rounded-[7px] bg-[#232323]"
 			>
-				{filterOrder}
+				{local.filterOrder}
 				<Icon name="ArrowDown" />
 			</div>
 			<AnimatePresence>
-				{expanded ? (
+				{local.expanded ? (
 					<motion.div
 						exit={{ opacity: 0, scale: 0.8 }}
 						animate={{ scale: [0.8, 1.04, 1], opacity: [0, 1] }}
@@ -45,8 +47,8 @@ export function LinkOrder(props: { filterOrder?: "Custom" | "RecentlyAdded" }) {
 					>
 						<button
 							onClick={() => {
-								setFilterOrder("Custom")
-								setExpanded(false)
+								local.filterOrder = "Custom"
+								local.expanded = false
 							}}
 							className="rounded-[7px] h-[34px] cursor-pointer px-[11px] flex items-center hover:bg-softDarkText/10 text-white/60"
 						>
@@ -54,8 +56,8 @@ export function LinkOrder(props: { filterOrder?: "Custom" | "RecentlyAdded" }) {
 						</button>
 						<button
 							onClick={() => {
-								setFilterOrder("Recently Added")
-								setExpanded(false)
+								local.filterOrder = "Recently Added"
+								local.expanded = false
 							}}
 							className="flex flex-row items-center rounded-[7px] h-[34px] whitespace-nowrap px-[11px] hover:bg-softDarkText/10 text-white/60"
 						>
