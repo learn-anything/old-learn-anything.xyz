@@ -3,56 +3,38 @@ import { proxy } from "valtio"
 import Icons from "./Icons"
 import Icon from "./Icons"
 
-export default function InboxTopbar(props: {
-	showView: "All" | "Links" | "Todos"
-	setShowView: (view: "All" | "Links" | "Todos") => void
-}) {
+export default function InboxTopbar() {
 	return (
 		<div className="flex flex-row justify-between px-5 pt-5 mb-5">
-			<div className=" flex [&>*]:h-full bg-hoverDark rounded-md text-white/60 bg-[#191919] [&>*]:flex-center h-[34px] items-center">
+			{/* <div className=" flex [&>*]:h-full bg-hoverDark rounded-md text-white/60 bg-[#191919] [&>*]:flex-center h-[34px] items-center">
 				<button
 					className={`px-[11px] cursor-pointer ${props.showView === "All" ? "bg-[#222222] text-white/80 rounded-md shadow-inner shadow-outer" : ""}`}
-					onClick={() => {
-						// props.showView.set("All")
-					}}
+					onClick={() => {}}
 				>
 					All
 				</button>
 				<button
 					className={`px-[11px] ${props.showView === "Links" ? "bg-[#222222] text-white/80 rounded-md shadow-inner shadow-outer" : ""}`}
-					onClick={() => {
-						// props.showView.set("Links")
-						//shits not working why tf
-					}}
+					onClick={() => {}}
 				>
 					Links
 				</button>
 				<button
 					className={`px-[11px] ${props.showView === "Todos" ? "bg-[#222222] text-white/80 rounded-md shadow-inner shadow-outer" : ""}`}
-					onClick={() => {
-						// props.showView.set("Todos")
-					}}
+					onClick={() => {}}
 				>
 					Todos
 				</button>
-				{/* <button
-					className={`px-[11px] ${props.showView === "Topics" ? "button" : ""}`}
-					onClick={() => {
-						// props.showView.set("Topics")
-					}}
-				>
-					Topics
-				</button> */}
 			</div>
 			<div className="flex flex-row items-center gap-2 cursor-pointer">
-				<Filter />
-				<LinkOrder />
-			</div>
+				<TopicFilter />
+				<SortFilter />
+			</div> */}
 		</div>
 	)
 }
 
-function Filter() {
+function TopicFilter() {
 	const local = proxy({
 		filters: ["Liked", "Topic"],
 		appliedFilters: [] as string[],
@@ -138,7 +120,7 @@ function Filter() {
 	)
 }
 
-function LinkOrder() {
+function SortFilter() {
 	const local = proxy({
 		expanded: false,
 		filterOrder: "Recently Added",
