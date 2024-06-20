@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
-import Button from "./Button"
 import Icon from "./Icons"
 import Topbar from "./Topbar"
 import NewTodoOrLink from "./NewTodoOrLink"
@@ -58,8 +57,19 @@ function ProfileLink(props: {
 	index: number
 }) {
 	const [hovered] = useState(false)
+	const [title, setTitle] = useState(props.link.title)
+	const [description, setDescription] = useState(props.link.description)
+
 	const handleAttachmentClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation()
+	}
+
+	const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value)
+	}
+
+	const changeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setDescription(event.target.value)
 	}
 
 	const isExpanded = props.expandedLink === props.link.title
@@ -80,7 +90,17 @@ function ProfileLink(props: {
 						className={`flex flex-row p-2 items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
 					>
 						<div className="flex items-center">
-							<p>{props.link.title}</p>
+							{isExpanded ? (
+								<input
+									onClick={(e) => e.stopPropagation()}
+									value={title}
+									onChange={changeTitle}
+									className="bg-inherit text-white/50 placeholder:text-neutral-600 w-full p-2 outline-none focus:outline-none focus:ring-0 border-none text-left"
+								/>
+							) : (
+								<p>{props.link.title}</p>
+							)}
+
 							{isExpanded && (
 								<p className="text-white/10 ml-2">{props.link.date}</p>
 							)}
@@ -98,8 +118,11 @@ function ProfileLink(props: {
 					>
 						<div className="flex-col flex justify-between text-[14px]">
 							<input
+								onClick={(e) => e.stopPropagation()}
 								className="bg-inherit text-white/50 placeholder:text-neutral-600 w-[90%] p-2 outline-none focus:outline-none focus:ring-0 border-none text-left"
 								style={{ textAlign: "left", whiteSpace: "pre-wrap" }}
+								value={description}
+								onChange={changeDescription}
 								placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, officia."
 							></input>
 						</div>
@@ -109,9 +132,7 @@ function ProfileLink(props: {
 								<input
 									type="text"
 									placeholder="Take a note..."
-									onChange={() => {
-										// TODO: change
-									}}
+									onChange={() => {}}
 									className="text-[14px] placeholder:text-neutral-600 text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 								/>
 							</div>
