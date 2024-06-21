@@ -1,4 +1,4 @@
-export type PersonalLink = {
+export type PersonalLinkType = {
 	title: string
 	url: string
 	description: string

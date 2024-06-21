@@ -4,7 +4,7 @@ import Icon from "../components/Icons"
 import Sidebar from "../components/Sidebar"
 import { useAccount } from "../main"
 import Inbox from "../components/Inbox"
-import { PersonalLink } from "../types"
+import { PersonalLinkType } from "../types"
 
 export const HomeAuthRouteState = proxy({
 	personalLinks: [
@@ -28,7 +28,7 @@ export const HomeAuthRouteState = proxy({
 			date: "2024",
 			dateAdded: "April 20, 2024",
 		},
-	] as PersonalLink[],
+	] as PersonalLinkType[],
 	enteringNewPersonalLinkOrTodo: false,
 })
 export default function HomeAuthRoute() {

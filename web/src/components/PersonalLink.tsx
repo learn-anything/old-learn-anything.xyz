@@ -19,6 +19,7 @@ export function PersonalLink(props: {
 			<motion.div
 				id="ProfileLink"
 				onClick={() => {
+					console.log("clicked")
 					props.setExpandedLink(local.isExpanded ? null : props.link.title)
 				}}
 				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all cursor-pointer ${
