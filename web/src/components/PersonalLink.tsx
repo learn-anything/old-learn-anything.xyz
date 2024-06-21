@@ -14,12 +14,19 @@ export function PersonalLink(props: {
 		description: props.link.description,
 		isExpanded: props.expandedLink === props.link.title,
 	})
+
+	// TODO: bring back once reactivity is fixed..
+	// useEffect(() => {
+	// 	local.isExpanded = props.expandedLink === props.link.title
+	// 	console.log(props.expandedLink === props.link.title, "value..")
+	// }, [props.expandedLink])
+
 	return (
 		<div>
 			<motion.div
 				id="ProfileLink"
 				onClick={() => {
-					console.log("clicked")
+					console.log(local.isExpanded ? null : props.link.title, "clicked")
 					props.setExpandedLink(local.isExpanded ? null : props.link.title)
 				}}
 				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all cursor-pointer ${
