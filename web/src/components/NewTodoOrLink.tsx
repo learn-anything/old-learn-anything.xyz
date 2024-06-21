@@ -1,6 +1,49 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { proxy } from "valtio"
 import Icon from "./Icons"
+
+export default function NewTodoOrLink({ addLink }: any) {
+	const local = proxy({
+		// TODO: comented out because valtio reactivity is breaking on updates to it
+		// https://discord.com/channels/740090768164651008/778312367439347724/1253700488139116595
+		// inputValue: "",
+		isUrlInput: false,
+		showInput: true,
+	})
+	const [inputValue, setInputValue] = useState("")
+
+	useEffect(() => {
+		console.log(local, "local of new todo")
+	}, [local])
+
+	return (
+		<form
+			onSubmit={(event: React.FormEvent) => {
+				event.preventDefault()
+				if (inputValue.trim()) {
+					addLink({ title: inputValue })
+					setInputValue("")
+					local.showInput = false
+				}
+			}}
+		>
+			{local.isUrlInput ? (
+				<UrlInput inputValue={inputValue} />
+			) : (
+				<TextInput
+					inputValue={inputValue}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						console.log(event.target.value, "event")
+						setInputValue(event.target.value)
+						local.isUrlInput =
+							event.target.value.startsWith("http://") ||
+							event.target.value.startsWith("https://")
+					}}
+				/>
+			)}
+		</form>
+	)
+}
 
 function TextInput({
 	inputValue,
@@ -100,41 +143,3 @@ function UrlInput({ inputValue }: { inputValue: string }) {
 		</div>
 	)
 }
-
-function NewTodoOrLink({ addLink }: any) {
-	const local = proxy({
-		inputValue: "",
-		isUrlInput: false,
-		showInput: true,
-	})
-
-	return (
-		<form
-			className="w-wk items-center justify-center flex flex-row bg-[#181818] rounded-xl"
-			onSubmit={(event: React.FormEvent) => {
-				event.preventDefault()
-				if (local.inputValue.trim()) {
-					addLink({ title: local.inputValue })
-					local.inputValue = ""
-					local.showInput = false
-				}
-			}}
-		>
-			{local.isUrlInput ? (
-				<UrlInput inputValue={local.inputValue} />
-			) : (
-				<TextInput
-					inputValue={local.inputValue}
-					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-						local.inputValue = event.target.value
-						local.isUrlInput =
-							event.target.value.startsWith("http://") ||
-							event.target.value.startsWith("https://")
-					}}
-				/>
-			)}
-		</form>
-	)
-}
-
-export default NewTodoOrLink

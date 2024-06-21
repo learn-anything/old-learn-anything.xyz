@@ -1,15 +1,21 @@
-import { proxy } from "valtio"
-import InboxTopbar from "./InboxTopbar"
+import { useState } from "react"
 import { useProxy } from "valtio/utils"
 import { HomeAuthRouteState } from "../routes/HomeAuthRoute"
-import NewTodoOrLink from "./NewTodoOrLink"
 import { PersonalLinkType } from "../types"
+import InboxTopbar from "./InboxTopbar"
+import NewTodoOrLink from "./NewTodoOrLink"
 import { PersonalLink } from "./PersonalLink"
 
 export default function Inbox() {
-	const local = proxy({
-		expandedLink: null as string | null,
-	})
+	// TODO: bring back once fixed https://discord.com/channels/740090768164651008/778312367439347724/1253698071657709688
+	// const local = proxy({
+	// 	expandedLink: null as string | null,
+	// })
+	// useEffect(() => {
+	// 	console.log(local.expandedLink, "expandedLink")
+	// }, [local.expandedLink])
+
+	const [expandedLink, setExpandedLink] = useState<string | null>(null)
 	const global = useProxy(HomeAuthRouteState)
 
 	return (
@@ -28,9 +34,9 @@ export default function Inbox() {
 					<PersonalLink
 						key={index}
 						link={link}
-						expandedLink={local.expandedLink}
+						expandedLink={expandedLink}
 						setExpandedLink={(title) => {
-							local.expandedLink = title
+							setExpandedLink(title)
 						}}
 						index={index}
 						showNewTodoOrLink={global.enteringNewPersonalLinkOrTodo}
