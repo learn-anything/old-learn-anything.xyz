@@ -19,7 +19,7 @@ function TextInput({
 			value={inputValue}
 			onChange={onChange}
 			autoFocus
-			className="flex flex-row items-center w-full justify-between bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-xl p-3 pl-5 h-full ml-3"
+			className="flex flex-row w-full h-full items-center bg-[#181818] outline-none placeholder-white/20 text-white/30 rounded-2xl p-3"
 		/>
 	)
 }
@@ -110,6 +110,7 @@ function NewTodoOrLink({ addLink }: any) {
 
 	return (
 		<form
+			className="w-wk items-center justify-center flex flex-row bg-[#181818] rounded-xl"
 			onSubmit={(event: React.FormEvent) => {
 				event.preventDefault()
 				if (local.inputValue.trim()) {

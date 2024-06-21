@@ -15,16 +15,14 @@ export default function Inbox() {
 	return (
 		<div className="w-full h-full border border-white/10 rounded-[20px]">
 			<InboxTopbar />
-			<div className="px-5">
+			<div style={{ margin: "0 auto" }} className="w-[98%] flex flex-col mx-4">
 				{global.enteringNewPersonalLinkOrTodo && (
-					<div>
-						<NewTodoOrLink
-							addLink={(link: PersonalLinkType) => {
-								global.personalLinks = [...global.personalLinks, link]
-								global.enteringNewPersonalLinkOrTodo = false
-							}}
-						/>
-					</div>
+					<NewTodoOrLink
+						addLink={(link: PersonalLinkType) => {
+							global.personalLinks = [...global.personalLinks, link]
+							global.enteringNewPersonalLinkOrTodo = false
+						}}
+					/>
 				)}
 				{global.personalLinks.map((link, index) => (
 					<PersonalLink

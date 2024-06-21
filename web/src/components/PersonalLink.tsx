@@ -22,7 +22,7 @@ export function PersonalLink(props: {
 					console.log("clicked")
 					props.setExpandedLink(local.isExpanded ? null : props.link.title)
 				}}
-				className={`rounded-lg hover:bg-hoverDark bg-softDark p-[2px] pl-3 h-full transition-all cursor-pointer ${
+				className={`rounded-lg hover:bg-hoverDark bg-softDark py-[2px] h-full transition-all cursor-pointer ${
 					local.isExpanded ? "h-full transition-all !bg-neutral-900" : ""
 				}`}
 			>
