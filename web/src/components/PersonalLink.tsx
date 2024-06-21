@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { proxy } from "valtio"
+import { proxy, useSnapshot } from "valtio"
 import Icon from "./Icons"
+import { useCallback, useEffect, useRef } from "react"
 
 export function PersonalLink(props: {
 	link: { title: string; description: string; date: string }
@@ -12,8 +13,37 @@ export function PersonalLink(props: {
 	const local = proxy({
 		title: props.link.title,
 		description: props.link.description,
-		isExpanded: props.expandedLink === props.link.title,
 	})
+
+	const snapshot = useSnapshot(local)
+	const ref = useRef<HTMLDivElement>(null)
+
+	const isExpanded = props.expandedLink === props.link.title
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				ref.current &&
+				!ref.current.contains(event.target as Node) &&
+				isExpanded
+			) {
+				props.setExpandedLink(null)
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside)
+		}
+	}, [isExpanded, props.setExpandedLink])
+
+	const handleClick = useCallback(
+		(event: React.MouseEvent) => {
+			event.stopPropagation()
+			props.setExpandedLink(isExpanded ? null : props.link.title)
+		},
+		[isExpanded, props.link.title, props.setExpandedLink],
+	)
 
 	// TODO: bring back once reactivity is fixed..
 	// useEffect(() => {
@@ -22,23 +52,20 @@ export function PersonalLink(props: {
 	// }, [props.expandedLink])
 
 	return (
-		<div>
+		<div ref={ref}>
 			<motion.div
 				id="ProfileLink"
-				onClick={() => {
-					console.log(local.isExpanded ? null : props.link.title, "clicked")
-					props.setExpandedLink(local.isExpanded ? null : props.link.title)
-				}}
+				onClick={handleClick}
 				className={`rounded-lg hover:bg-hoverDark bg-softDark py-[2px] h-full transition-all cursor-pointer ${
-					local.isExpanded ? "h-full transition-all !bg-neutral-900" : ""
+					isExpanded ? "h-full transition-all !bg-neutral-900" : ""
 				}`}
 			>
 				<div className="flex flex-row items-center justify-between">
 					<div
-						className={`flex flex-row p-2 items-center w-full justify-between ${!local.isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
+						className={`flex flex-row p-2 items-center w-full justify-between ${!isExpanded ? "bg-[#121212] rounded-xl py-2 px-4" : ""}`}
 					>
 						<div className="flex items-center">
-							{local.isExpanded ? (
+							{isExpanded ? (
 								<input
 									onClick={(e) => e.stopPropagation()}
 									value={local.title}
@@ -51,17 +78,17 @@ export function PersonalLink(props: {
 								<p>{props.link.title}</p>
 							)}
 
-							{local.isExpanded && (
+							{isExpanded && (
 								<p className="text-white/10 ml-2">{props.link.date}</p>
 							)}
 						</div>
-						{local.isExpanded && (
+						{isExpanded && (
 							<Icon name="Link" height="20" width="30" border="gray" />
 						)}
 					</div>
 				</div>
 
-				{local.isExpanded ? (
+				{isExpanded ? (
 					<motion.div
 						onClick={(event: React.MouseEvent<HTMLDivElement>) => {
 							event.stopPropagation()
@@ -90,7 +117,7 @@ export function PersonalLink(props: {
 									className="text-[14px] placeholder:text-neutral-600 text-white/40 pl-2 border-none bg-inherit outline-none focus:outline-none focus:ring-0"
 								/>
 							</div>
-							{local.isExpanded ? (
+							{isExpanded ? (
 								<div className="flex flex-row justify-between items-center gap-2">
 									<motion.div
 										animate={{
