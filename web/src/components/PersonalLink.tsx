@@ -15,7 +15,6 @@ export function PersonalLink(props: {
 		description: props.link.description,
 	})
 
-	const snapshot = useSnapshot(local)
 	const ref = useRef<HTMLDivElement>(null)
 
 	const isExpanded = props.expandedLink === props.link.title

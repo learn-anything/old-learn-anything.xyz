@@ -36,24 +36,22 @@ export default function HomeAuthRoute() {
 	const global = useAccount({
 		root: { personalLinks: [{ globalLink: {} }], todos: [{}] },
 	}).me?.root
-	if (!global) return <></>
+	// if (!global) return <></>
 	return (
-		<>
-			<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
-				<Sidebar />
-				<div className="p-2 w-full">
-					<Inbox />
-				</div>
-				<button
-					onClick={() => {
-						local.enteringNewPersonalLinkOrTodo =
-							!local.enteringNewPersonalLinkOrTodo
-					}}
-					className={`fixed z-1 flex items-center justify-center bottom-5 w-[50px] h-[50px] rounded-full transition-all bg-[#1f305c] right-5 ${local.enteringNewPersonalLinkOrTodo ? "rotate-45" : ""}`}
-				>
-					<Icon name="Plus" />
-				</button>
+		<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
+			<Sidebar />
+			<div className="p-2 w-full">
+				<Inbox />
 			</div>
-		</>
+			<button
+				onClick={() => {
+					local.enteringNewPersonalLinkOrTodo =
+						!local.enteringNewPersonalLinkOrTodo
+				}}
+				className={`fixed z-1 flex items-center justify-center bottom-5 w-[50px] h-[50px] rounded-full transition-all bg-[#1f305c] right-5 ${local.enteringNewPersonalLinkOrTodo ? "rotate-45" : ""}`}
+			>
+				<Icon name="Plus" />
+			</button>
+		</div>
 	)
 }
