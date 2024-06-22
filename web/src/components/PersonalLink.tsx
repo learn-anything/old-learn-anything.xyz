@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { proxy, useSnapshot } from "valtio"
-import Icon from "./Icons"
 import { useCallback, useEffect, useRef } from "react"
+import { proxy } from "valtio"
+import Icon from "./Icons"
 
 export function PersonalLink(props: {
 	link: { title: string; description: string; date: string }

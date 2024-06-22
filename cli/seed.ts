@@ -111,6 +111,7 @@ async function publicGlobalTopics() {
 	const fileContent = await file.text()
 	const obj = JSON.parse(fileContent)
 	let topicsWithConnections = JSON.stringify(obj, null, 2)
+	console.log(topicsWithConnections)
 }
 
 await seed()

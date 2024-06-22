@@ -6,7 +6,7 @@ export class PersonalLink extends CoMap {
 	globalLink = co.ref(GlobalLink)
 }
 
-class GlobalLink extends CoMap {
+export class GlobalLink extends CoMap {
 	url = co.string // unique
 }
 
@@ -22,7 +22,7 @@ class Section extends CoMap {
 class ListOfSections extends CoList.Of(co.ref(() => Section)) {}
 
 // TODO: not used until jazz supports rich text
-class Page extends CoMap {
+export class Page extends CoMap {
 	title = co.string
 	// TODO: make rich text
 	content = co.string
