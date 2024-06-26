@@ -14,7 +14,10 @@ class GlobalTopic extends CoMap {
 	name = co.string
 	title = co.string
 	sections = co.ref(ListOfSections)
+	connections = co.ref(ListOfGlobalTopics)
 }
+class ListOfGlobalTopics extends CoList.Of(co.ref(GlobalTopic)) {}
+
 class Section extends CoMap {
 	title = co.string
 	links = co.ref(ListOfGlobalLinks)

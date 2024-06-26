@@ -36,7 +36,7 @@ export default function HomeAuthRoute() {
 	const global = useAccount({
 		root: { personalLinks: [{ globalLink: {} }], todos: [{}] },
 	}).me?.root
-	// if (!global) return <></>
+	if (!global) return <></>
 	return (
 		<div className="flex h-screen max-w-screen w-screen overflow-hidden text-white">
 			<Sidebar />

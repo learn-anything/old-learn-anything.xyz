@@ -11,6 +11,9 @@ async function seed() {
 			case undefined:
 				console.log("No command provided")
 				break
+			case "setup":
+				await setup()
+				break
 			case "authInbox":
 				await authInbox()
 				break
@@ -25,6 +28,22 @@ async function seed() {
 	} catch (err) {
 		console.error("Error occurred:", err)
 	}
+}
+
+async function setup() {
+	const { worker } = await startWorker({
+		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
+		accountSecret:
+			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
+	})
+	const globalLinksGroup = Group.create({ owner: worker })
+	globalLinksGroup.addMember("everyone", "reader")
+
+	// TODO: make it so it does not override
+	await Bun.write(
+		"./.env",
+		`JAZZ_GLOBAL_GROUP=${JSON.stringify(globalLinksGroup.id)}`,
+	)
 }
 
 // seeds / route (inbox of personal links, todos)
@@ -96,11 +115,20 @@ async function authInbox() {
 
 // seeds global topics
 async function publicGlobalTopics() {
-	// const { worker } = await startWorker({
-	// 	accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
-	// 	accountSecret:
-	// 		"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
-	// })
+	const { worker } = await startWorker({
+		accountID: "co_zhvp7ryXJzDvQagX61F6RCZFJB9",
+		accountSecret:
+			"sealerSecret_z7o2TyWgbzin7Syoa4xUvoQc9ufyc3G2KWj6vfUsoE5en/signerSecret_z6ZnmVjPjqjFPtRcEiEVbPhuMcauvdE9hV7tVLUxRx1z5",
+	})
+
+	// console.log(process.env.JAZZ_GLOBAL_GROUP!, "group")
+	const globalGroup = await Group.load(
+		process.env.JAZZ_GLOBAL_GROUP!,
+		worker,
+		{},
+	)
+	// console.log(globalGroup, "group")
+	// return
 
 	const currentFilePath = import.meta.path
 	const connectionsFilePath = `${currentFilePath.replace(
@@ -109,9 +137,16 @@ async function publicGlobalTopics() {
 	)}`
 	const file = Bun.file(connectionsFilePath)
 	const fileContent = await file.text()
-	const obj = JSON.parse(fileContent)
-	let topicsWithConnections = JSON.stringify(obj, null, 2)
+	const topicsWithConnections = JSON.parse(fileContent)
+	// let topicsWithConnections = JSON.stringify(obj, null, 2)
 	console.log(topicsWithConnections)
+
+	topicsWithConnections.map((topic) => {
+		const globalTopic = GlobalTopic.create(
+			{ name: topic.name, description: topic.description },
+			{ owner: globalGroup },
+		)
+	})
 }
 
 await seed()
