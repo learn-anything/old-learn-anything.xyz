@@ -1,4 +1,8 @@
-# Learn Anything
+# Old Learn Anything
+
+This is most recent archived version of LA. It's using Jazz but it has code using Remix and also has code for mobile app.
+
+As focus of LA now is to make web version work well, it's here for reference as the code in [github.com/learn-anything/learn-anything.xyz](https://github.com/learn-anything/learn-anything.xyz) is made work well.
 
 ## Setup
 
